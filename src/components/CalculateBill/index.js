@@ -50,6 +50,7 @@ class CalculateBill extends Component {
                                 <Text style={styles.text}>Tiền điện: {this.state.Price.electric.price} đồng</Text>
                                 <Text style={styles.text}>Thuế VAT: {Math.round(this.state.Price.electric.price * 0.1)} đồng</Text>
                                 <Text style={styles.text}>Tiền nước: {Math.round(this.state.Price.water.price)} đồng</Text>
+                                <Text style={[styles.text, {fontWeight: 'bold', fontSize: 16}]}>Tổng cộng: {Math.round(this.state.Price.electric.price * 1.1 + this.state.Price.water.price)} đồng</Text>
                             </View>
                         ) : undefined}
                     </View>
