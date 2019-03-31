@@ -16,8 +16,8 @@ class CalculateBill extends Component {
         const { Price, calculate } = this.props;
         const { water, electric, unitPrice } = this.state;
         return (
-            <View style={{flex: 1}}>
-                <View style={styles.container}>
+            <View style={styles.container}>
+                <View style={{ width: '60%' }}>
                     <View style={styles.form}>
                         <Text style={styles.text}>Chỉ số điện mới</Text>
                         <TextInput style={[styles.input, { height: 'auto' }]} returnKeyType='done' keyboardType='number-pad' value={electric} placeholder='Chỉ số điện mới' onChangeText={(text) => this.setState({ electric: text })} />
@@ -27,10 +27,10 @@ class CalculateBill extends Component {
                         <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={unitPrice} placeholder='Đơn giá nước' onChangeText={(text) => this.setState({ unitPrice: text })} />
                     </View>
                 </View>
-                <View style={styles.container}>
+                <View style={{ width: '60%' }}>
                     <View style={styles.form}>
                         <Button title='Tính tiền' onPress={() => {
-                            calculate({ electric, water, unitPrice });
+                            calculate({month: 3, year: 2014, electric, water, unitPrice });
                             // const electric = {};
                             // electric.used = parseInt(this.state.Electric.new, 10) - parseInt(this.state.Electric.old, 10);
                             // electric.price = calculateElectric(electric.used, this.state.Electric.unit, this.state.Electric.limit);
@@ -46,7 +46,7 @@ class CalculateBill extends Component {
                                 <Text style={styles.text}>Thuế VAT: {Math.round(Price.electric.price * 0.1)} đồng</Text>
                                 <Text style={styles.text}>Nước tiêu thụ: {Price.water.used} &#13221;</Text>
                                 <Text style={styles.text}>Tiền nước: {Math.round(Price.water.price)} đồng</Text>
-                                <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(Price.electric.price * 1.1 + Price.water.price)} đồng</Text>
+                                <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(Price.totalPrice)} đồng</Text>
                             </View>
                         ) : undefined}
                     </View>
@@ -65,20 +65,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     form: {
-        // flex: 1,
-        // marginRight: 10,
-        // flexDirection: 'column',
-        // justifyContent: 'center',
-        // backgroundColor: '#F5FCFF',
+        marginRight: 10,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#F5FCFF',
     },
     input: {
-        // width: '100%',
-        // textAlign: 'center',
-        // fontSize: 14,
-        // borderRightWidth: 2,
-        // borderLeftWidth: 2,
-        // borderTopWidth: 2,
-        // borderBottomWidth: 2,
+        width: '100%',
+        textAlign: 'center',
+        fontSize: 14,
+        borderRightWidth: 2,
+        borderLeftWidth: 2,
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
     },
     text: {
         fontSize: 14,
@@ -88,8 +87,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-    Price: state.calculateBillReducer.Price,
-    unitPrice: state.calculateBillReducer.Water.unitPrice,
+    Price: state.calculateBillReducer.data.length > 0 ? state.calculateBillReducer.data[state.calculateBillReducer.data.length - 1].Price : undefined
 })
 
 const mapDispatchToProps = (dispatch) => ({

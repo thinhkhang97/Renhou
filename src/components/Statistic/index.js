@@ -17,27 +17,33 @@ class Statistic extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Picker
-                    selectedValue={this.state.month}
-                    style={{ height: 50, width: 100 }}
-                    onValueChange={(month) =>
-                        this.setState({ month: month })
-                    }>
-                    {this.state.listMonth.map(month => (
-                        <Picker.Item key={month} label={month.toString()} value={month} />
-                    ))}
-                </Picker>
-                <Picker
-                    selectedValue={this.state.year}
-                    style={{ height: 50, width: 100 }}
-                    onValueChange={(year) =>
-                        this.setState({ year: year })
-                    }>
-                    {this.state.listYear.map(year => (
-                        <Picker.Item key={year} label={year.toString()} value={year} />
-                    ))}
-                </Picker>
-            </View>
+                <View style={styles.form}>
+                    <Picker
+                        selectedValue={this.state.month}
+                        style={{ width: '30%' }}
+                        onValueChange={(month) =>
+                            this.setState({ month: month })
+                        }>
+                        {this.state.listMonth.map(month => (
+                            <Picker.Item key={month} label={'Tháng ' + month.toString()} value={month} />
+                        ))}
+                    </Picker>
+                    <Picker
+                        selectedValue={this.state.year}
+                        style={{ width: '30%' }}
+                        onValueChange={(year) =>
+                            this.setState({ year: year })
+                        }>
+                        {this.state.listYear.map(year => (
+                            <Picker.Item key={year} label={year.toString()} value={year} />
+                        ))}
+                    </Picker>
+                </View>
+                <View style={styles.form}>
+                    <Button title='Xác nhận' onPress={() => {
+                    }}></Button>
+                </View>
+            </View >
         )
     }
 }
@@ -45,18 +51,14 @@ class Statistic extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
     form: {
-        flex: 1,
-        marginRight: 10,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
+        flexDirection: 'row',
     },
     input: {
         width: '100%',
