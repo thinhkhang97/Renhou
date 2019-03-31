@@ -8,13 +8,15 @@ class Statistic extends Component {
         const listYear = Array.from({ length: 6 }, (v, k) => k + 2014);
         const listMonth = Array.from({ length: 12 }, (v, k) => k + 1);
         this.state = {
-            year: '',
-            month: '',
+            year: listYear[0],
+            month: 1,
             listYear,
             listMonth,
         }
     }
     render() {
+        const { history } = this.props;
+        const { result } = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.form}>
@@ -41,8 +43,21 @@ class Statistic extends Component {
                 </View>
                 <View style={styles.form}>
                     <Button title='Xác nhận' onPress={() => {
+                        const result = history.filter(item => item.Month === this.state.month && item.Year === this.state.year);
+                        if (result.length > 0)
+                            this.setState({ result: result[0] });
+                        else
+                            this.setState({ result: undefined });
                     }}></Button>
                 </View>
+                {result ? <View>
+                    <Text style={[styles.text, { marginTop: 10 }]}>Điện năng tiêu thụ: {result.Price.electric.used} kWh</Text>
+                    <Text style={styles.text}>Tiền điện: {result.Price.electric.price} đồng</Text>
+                    <Text style={styles.text}>Thuế VAT: {Math.round(result.Price.electric.price * 0.1)} đồng</Text>
+                    <Text style={styles.text}>Nước tiêu thụ: {result.Price.water.used} &#13221;</Text>
+                    <Text style={styles.text}>Tiền nước: {Math.round(result.Price.water.price)} đồng</Text>
+                    <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(result.Price.totalPrice)} đồng</Text>
+                </View> : <Text style={styles.text}>Chưa có dữ liệu</Text>}
             </View >
         )
     }
@@ -76,4 +91,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Statistic
+const mapStateToProps = (state) => ({
+    history: state.calculateBillReducer.data,
+})
+
+export default connect(mapStateToProps)(Statistic);

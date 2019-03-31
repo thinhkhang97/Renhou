@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
         marginRight: 10,
         flexDirection: 'column',
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
     },
     input: {
         width: '100%',
