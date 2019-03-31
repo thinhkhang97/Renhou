@@ -9,6 +9,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import CalculateBill from './src/components/CalculateBill';
+import Statistic from './src/components/Statistic';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CalculateBill />
+        <Statistic />
       </View>
     );
   }
@@ -30,9 +31,6 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,

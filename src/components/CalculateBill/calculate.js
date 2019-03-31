@@ -1,5 +1,7 @@
 
-export default function calculateElectric(input, unit, limit) {
+export default function calculateElectric(input) {
+    const unit = [1678, 1734, 2014, 2536, 2834, 2927];
+    const limit = [50, 50, 100, 100, 100, 100];
     let rest = input;
     let output = 0;
     for (let i = 0; i < limit.length; i++) {
