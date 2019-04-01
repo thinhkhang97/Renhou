@@ -1,19 +1,12 @@
 import * as React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import ListRoom from './ListRoom'
 
-const FirstRoute = () => (
-    <View style={[styles.container, { backgroundColor: 'white' }]} />
-);
 const SecondRoute = () => (
     <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
 );
-const LazyPlaceholder = ({ route }) => (
-    <View style={styles.scene}>
-        <Text>Loading {route.title}…</Text>
-    </View>
-);
-export default class TabViewExample extends React.Component {
+export default class Home extends React.Component {
     state = {
         index: 0,
         routes: [
@@ -27,7 +20,7 @@ export default class TabViewExample extends React.Component {
             <TabView
                 navigationState={this.state}
                 renderScene={SceneMap({
-                    first: FirstRoute,
+                    first: ListRoom,
                     second: SecondRoute,
                 })}
                 onIndexChange={index => this.setState({ index })}
