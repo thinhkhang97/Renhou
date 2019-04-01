@@ -8,22 +8,30 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import CalculateBill from './src/components/CalculateBill';
 import Statistic from './src/components/Statistic';
 import Home from './src/components/Home';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+const AppNavigator = createStackNavigator({
+  Home: {
+    navigationOptions: () => ({
+      title: `Home`,
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#FE5430' },
+      // headerBackTitle: null
+    }),
+    screen: Home
+  }
 });
+const AppContainer = createAppContainer(AppNavigator);
+
 
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Home />
+        <AppContainer />
       </View>
     );
   }

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 const FirstRoute = () => (
-    <View style={[styles.container, { backgroundColor: '#ff4081' }]} />
+    <View style={[styles.container, { backgroundColor: 'white' }]} />
 );
 const SecondRoute = () => (
     <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
@@ -22,52 +22,21 @@ export default class TabViewExample extends React.Component {
             // { key: 'third', title: 'Chưa trả tiền' },
         ],
     };
-
-    _handleIndexChange = index => this.setState({ index });
-
-    _renderTabBar = props => {
-        const inputRange = props.navigationState.routes.map((x, i) => i);
-
-        return (
-            <View style={styles.tabBar}>
-                {props.navigationState.routes.map((route, i) => {
-
-                    return (
-                        <TouchableOpacity
-                            key={i}
-                            style={styles.tabItem}
-                            onPress={() => this.setState({ index: i })}>
-                            <Text>{route.title}</Text>
-                        </TouchableOpacity>
-                    );
-                })}
-            </View>
-        );
-    };
-
-    _renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-    });
-    _renderLazyPlaceholder = ({ route }) => <LazyPlaceholder route={route} />;
     render() {
         return (
             <TabView
-                lazy
-                renderLazyPlaceholder={this._renderLazyPlaceholder}
                 navigationState={this.state}
                 renderScene={SceneMap({
                     first: FirstRoute,
                     second: SecondRoute,
                 })}
+                onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
-                    <TabBar
+                    < TabBar
                         {...props}
                         style={styles.tabBar}
-                        labelStyle={{textTransform: 'capitalize'}}
                     />
                 }
-                onIndexChange={this._handleIndexChange}
             />
         );
     }
@@ -80,8 +49,8 @@ const styles = StyleSheet.create({
     },
     tabBar: {
         // flexDirection: 'row',
-        textTransform: 'lowercase',
-        paddingTop: 30,
+        backgroundColor: '#FE5430',
+        paddingTop: -2,
     },
     tabItem: {
         flex: 1,
