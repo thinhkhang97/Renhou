@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
         alignItems: 'center'
     },
     text: {

@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import AllBill from './AllBill';
 const FirstRoute = () => (
     <View style={[styles.container, { backgroundColor: 'white' }]} />
 );
-const SecondRoute = () => (
-    <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
-);
-
 export default class RoomDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -28,7 +25,7 @@ export default class RoomDetail extends React.Component {
                 navigationState={this.state}
                 renderScene={SceneMap({
                     first: FirstRoute,
-                    second: SecondRoute,
+                    second: AllBill,
                 })}
                 onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
