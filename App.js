@@ -12,18 +12,24 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import CalculateBill from './src/components/CalculateBill';
 import Statistic from './src/components/Statistic';
 import Home from './src/components/Home';
+import RoomDetail from './src/components/Room/RoomDetail';
 
 const AppNavigator = createStackNavigator({
-  Home: {
-    navigationOptions: () => ({
-      title: `Home`,
-      headerTintColor: 'white',
-      headerStyle: { backgroundColor: '#FE5430' },
-      // headerBackTitle: null
-    }),
-    screen: Home
-  }
-});
+  Home,
+  RoomDetail,
+},
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#FE5430',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerBackTitle: null,
+    },
+  });
 const AppContainer = createAppContainer(AppNavigator);
 
 
