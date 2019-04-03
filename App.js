@@ -7,22 +7,24 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import CalculateBill from './src/components/CalculateBill';
+import { RoomDetail } from "./src/screen";
 import Statistic from './src/components/Statistic';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 class App extends Component {
+  
   render() {
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
-        <Statistic />
+        <Text>hello world</Text>
+        <TouchableOpacity onPress={()=>{
+          navigation.navigate("roomDetail");
+        }}>
+        <Text>RoomDetail</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -44,4 +46,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const roomStack = createStackNavigator({
+  app: {
+    screen: App
+  },
+  roomDetail: {
+    screen: RoomDetail
+  }
+},{
+  initialRouteName: "app"
+});
+
+export default createAppContainer(roomStack);
