@@ -11,7 +11,7 @@ export default class AllBill extends React.Component {
         let date = [];
         let data = [];
         for (i = 0; i < 30; i++) {
-            date.push(new Date(2019, 1, i + 1));
+            date.push(new Date(2019, 0, i + 1));
             data.push({
                 key: date[i].toString(),
                 date: date[i],
@@ -40,7 +40,7 @@ export default class AllBill extends React.Component {
                             )
                         }} />
                 </ScrollView>
-                <View style={styles.footer}><Icon name='ios-add-circle' size={60} color='red' /></View>
+                <TouchableOpacity style={styles.footer}><Icon name='ios-add-circle' size={60} color='red' /></TouchableOpacity>
             </View>
         );
     }
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: 'column',
         alignSelf: 'flex-end',
-        marginBottom: 20,
+        marginVertical: 10,
         marginRight: 20,
     }
 });
