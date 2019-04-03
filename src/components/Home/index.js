@@ -26,14 +26,15 @@ export default class Home extends React.Component {
                     first: () => <ListRoom navigation={this.props.navigation} />,
                     second: SecondRoute,
                 })}
-    onIndexChange = { index => this.setState({ index }) }
-    renderTabBar = { props =>
+                onIndexChange={index => this.setState({ index })}
+                renderTabBar={props =>
                     < TabBar
-                        {...props }
-style = { styles.tabBar }
-    />
+                        {...props}
+                        style={styles.tabBar}
+                        indicatorStyle={{ backgroundColor: '#1E90FF' }}
+                    />
                 }
-/>
+            />
         );
     }
 }
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     },
     tabBar: {
         // flexDirection: 'row',
-        backgroundColor: '#FE5430',
+        backgroundColor: '#FF6347',
         paddingTop: -2,
     },
     tabItem: {

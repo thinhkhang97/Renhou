@@ -7,7 +7,7 @@ export default class ListRoom extends React.Component {
     };
     render() {
         return (
-            <ScrollView style={{marginTop: 20}}>
+            <ScrollView style={{paddingTop: 20}}>
                 <FlatList data={[{ key: '2' }, { key: '3' }]}
                     renderItem={({ item }) => {
                         return (

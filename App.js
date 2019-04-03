@@ -21,7 +21,7 @@ const AppNavigator = createStackNavigator({
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#FE5430',
+        backgroundColor: '#FF6347',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -46,16 +46,6 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 

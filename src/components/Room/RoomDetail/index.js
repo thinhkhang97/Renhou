@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight, Button } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
+import PopupMenu from './PopupMenu';
+
 const FirstRoute = () => (
     <View style={[styles.container, { backgroundColor: 'white' }]} />
 );
@@ -9,6 +11,9 @@ export default class RoomDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Phòng ' + navigation.getParam('roomID', 'No room ID'),
+            headerRight: (
+                <PopupMenu />
+            ),
         };
     };
     state = {
@@ -32,6 +37,7 @@ export default class RoomDetail extends React.Component {
                     < TabBar
                         {...props}
                         style={styles.tabBar}
+                        indicatorStyle={{ backgroundColor: '#1E90FF' }}
                     />
                 }
             />
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tabBar: {
-        backgroundColor: '#FE5430',
+        backgroundColor: '#FF6347',
     },
     tabItem: {
         flex: 1,

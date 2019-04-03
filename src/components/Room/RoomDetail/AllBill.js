@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import PopupMenu from './PopupMenu';
 
 export default class AllBill extends React.Component {
     sstate = {
@@ -7,7 +8,7 @@ export default class AllBill extends React.Component {
     };
     render() {
         return (
-            <ScrollView style={{ marginTop: 20 }}>
+            <ScrollView style={{ paddingTop: 20, flex: 1 }}>
                 <FlatList data={[{
                     key: '3/1/2019',
                     total: 2100000,
@@ -16,7 +17,61 @@ export default class AllBill extends React.Component {
                     key: '3/2/2019',
                     total: 2100000,
                     paid: true,
-                }]}
+                },
+                {
+                    key: '3/3/2019',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/4/2019',
+                    total: 2100000,
+                    paid: true,
+                },
+                {
+                    key: '3/6/2019',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/5/2019',
+                    total: 2100000,
+                    paid: true,
+                },
+                {
+                    key: '3/7/2019',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/8/2019',
+                    total: 2100000,
+                    paid: true,
+                }, {
+                    key: '3/9/2019',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/10/2019',
+                    total: 2100000,
+                    paid: true,
+                },
+                {
+                    key: '3/1/2009',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/132/2019',
+                    total: 2100000,
+                    paid: true,
+                },
+                {
+                    key: '3/11/2019',
+                    total: 2100000,
+                    paid: false,
+                }, {
+                    key: '3/12/2019',
+                    total: 2100000,
+                    paid: true,
+                },
+                ]}
                     renderItem={({ item }) => {
                         return (
                             <TouchableHighlight style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
@@ -27,7 +82,7 @@ export default class AllBill extends React.Component {
                                         <Text style={styles.time}>Thời gian: {item.key}</Text>
                                         <Text style={styles.total}>Tổng tiền: {item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} đồng</Text>
                                     </View>
-                                    <Text style={[styles.right, item.paid ? { color: '#808080' } : { color: '#FE5430', fontWeight: 'bold'}]}>{item.paid ? 'Đã thanh toán' : 'Chưa thanh toán'}</Text>
+                                    <Text style={[styles.right, item.paid ? { color: '#808080' } : { color: '#FE5430', fontWeight: 'bold' }]}>{item.paid ? 'Đã thanh toán' : 'Chưa thanh toán'}</Text>
                                 </View>
                             </TouchableHighlight>
                         )
