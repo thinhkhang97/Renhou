@@ -30,7 +30,7 @@ class CalculateBill extends Component {
                 <View style={{ width: '60%' }}>
                     <View style={styles.form}>
                         <Button title='Tính tiền' onPress={() => {
-                            calculate({month: 3, year: 2014, electric, water, unitPrice });
+                            calculate({month: 4, year: 2014, electric, water, unitPrice });
                             // const electric = {};
                             // electric.used = parseInt(this.state.Electric.new, 10) - parseInt(this.state.Electric.old, 10);
                             // electric.price = calculateElectric(electric.used, this.state.Electric.unit, this.state.Electric.limit);
