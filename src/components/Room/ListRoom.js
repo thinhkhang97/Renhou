@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Global from '../../Global';
 
 export default class ListRoom extends React.Component {
@@ -12,14 +12,14 @@ export default class ListRoom extends React.Component {
                 <FlatList data={[{ key: '2' }, { key: '3' }]}
                     renderItem={({ item }) => {
                         return (
-                            <TouchableHighlight style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
+                            <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
                                 roomID: item.key,
                             })}>
                                 <View style={styles.item}>
                                     <Text style={styles.text}>Phòng {item.key}</Text>
                                     <Text style={styles.date}>February 3</Text>
                                 </View>
-                            </TouchableHighlight>
+                            </TouchableOpacity>
                         )
                     }} />
             </ScrollView>

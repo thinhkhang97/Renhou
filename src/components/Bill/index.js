@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import Global from '../../Global';
 
 class Bill extends Component {
@@ -22,8 +22,8 @@ class Bill extends Component {
         const date = navigation.getParam('date', new Date());
         const roomID = navigation.getParam('roomID', -1);
         return (
-            <View style={styles.container}>
-                <View style={styles.row}>
+            <ScrollView style={styles.container}>
+                <View style={[styles.row, {marginTop: 10}]}>
                     <Text style={styles.label}>Phòng</Text>
                     <View style={styles.data}><Text style={styles.dataText}>Phòng {roomID.toString()}</Text></View>
                 </View>
@@ -80,10 +80,10 @@ class Bill extends Component {
                 </View>
                 <View style={styles.row}>
                     <TouchableOpacity style={styles.button}>
-                        <Text styles={styles.buttonText}>Thanh toán</Text>
+                        <Text style={styles.buttonText}>Thanh toán</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        // justifyContent: 'flex-start',
+        // alignItems: 'flex-start',
         backgroundColor: Global.COLOR.BACKGROUND,
     },
     row: {
@@ -124,16 +124,18 @@ const styles = StyleSheet.create({
         borderColor: '#848484',
         paddingVertical: 5,
     },
-    buttonText: {
-        fontSize: 50,
-        color: 'white',
-    },
     button: {
         flex: 1,
-        paddingVertical: 5,
+        marginTop: 20,
+        paddingVertical: 15,
+        borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Global.COLOR.NAVIGATION,
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white',
     },
 });
 
