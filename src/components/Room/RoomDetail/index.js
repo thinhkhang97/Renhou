@@ -3,6 +3,7 @@ import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight, Butto
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
 import PopupMenu from './PopupMenu';
+import Global from '../../../Global';
 
 const FirstRoute = () => (
     <View style={[styles.container, { backgroundColor: 'white' }]} />
@@ -30,7 +31,7 @@ export default class RoomDetail extends React.Component {
                 navigationState={this.state}
                 renderScene={SceneMap({
                     first: FirstRoute,
-                    second: AllBill,
+                    second: () => <AllBill navigation={this.props.navigation} />
                 })}
                 onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
@@ -47,11 +48,10 @@ export default class RoomDetail extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        // paddingTop: 50,
         flex: 1,
     },
     tabBar: {
-        backgroundColor: '#FF6347',
+        backgroundColor: Global.COLOR.NAVIGATION,
     },
     tabItem: {
         flex: 1,

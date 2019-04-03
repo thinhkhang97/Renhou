@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import Global from '../../Global';
 
 export default class ListRoom extends React.Component {
     state = {
@@ -7,7 +8,7 @@ export default class ListRoom extends React.Component {
     };
     render() {
         return (
-            <ScrollView style={{paddingTop: 20}}>
+            <ScrollView style={styles.container}>
                 <FlatList data={[{ key: '2' }, { key: '3' }]}
                     renderItem={({ item }) => {
                         return (
@@ -27,6 +28,11 @@ export default class ListRoom extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: Global.COLOR.BACKGROUND,
+        flex: 1,
+        paddingTop: 20,
+    },
     room: {
         marginBottom: 15,
         paddingVertical: 5,

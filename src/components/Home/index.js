@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import ListRoom from '../Room/ListRoom'
+import Global from '../../Global';
 
 const SecondRoute = () => (
     <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
     tabBar: {
         // flexDirection: 'row',
-        backgroundColor: '#FF6347',
+        backgroundColor: Global.COLOR.NAVIGATION,
         paddingTop: -2,
     },
     tabItem: {

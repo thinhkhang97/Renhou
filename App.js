@@ -10,18 +10,20 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import CalculateBill from './src/components/CalculateBill';
-import Statistic from './src/components/Statistic';
+import Bill from './src/components/Bill';
 import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
+import Global from './src/Global';
 
 const AppNavigator = createStackNavigator({
   Home,
   RoomDetail,
+  Bill,
 },
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#FF6347',
+        backgroundColor: Global.COLOR.NAVIGATION,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
