@@ -10,7 +10,7 @@ export default class AllBill extends React.Component {
         return (
             <ScrollView style={{ paddingTop: 20, flex: 1 }}>
                 <FlatList data={[{
-                    key: '3/1/2019',
+                    key: '30/12/2019',
                     total: 2100000,
                     paid: false,
                 }, {
@@ -58,7 +58,7 @@ export default class AllBill extends React.Component {
                     total: 2100000,
                     paid: false,
                 }, {
-                    key: '3/132/2019',
+                    key: '13/12/2019',
                     total: 2100000,
                     paid: true,
                 },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     row: {
-        flex: 4,
+        flex: 5,
     },
     total: {
         fontSize: 12,
