@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight, Button } from 'react-native';
+import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
 import PopupMenu from './PopupMenu';

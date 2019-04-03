@@ -9,7 +9,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import CalculateBill from './src/components/CalculateBill';
 import Bill from './src/components/Bill';
 import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
