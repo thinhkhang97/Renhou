@@ -14,11 +14,13 @@ import Bill from './src/components/Bill';
 import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
 import Global from './src/Global';
+import UserProfile from "./src/screen/userProfile";
 
 const AppNavigator = createStackNavigator({
   Home,
   RoomDetail,
   Bill,
+  UserProfile
 },
   {
     defaultNavigationOptions: {
@@ -36,7 +38,9 @@ const AppContainer = createAppContainer(AppNavigator);
 
 
 class App extends Component {
+  
   render() {
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <AppContainer />
@@ -50,5 +54,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
 
 export default App;
