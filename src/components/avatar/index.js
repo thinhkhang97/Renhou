@@ -2,20 +2,23 @@ import * as React from "react";
 import {View, Image, StyleSheet} from "react-native";
 
 class Avatar extends React.Component {
+    static defaultProps = {
+        size: 40
+    }
     render() {
-        const {source} = this.props;
+        const {source, size,} = this.props;
+        const avatarStyle = {
+            width: size,
+            height: size,
+            borderRadius: size/2
+        }
         return (
-            <Image style={styles.container} source={source}/>
+            <Image style={avatarStyle} source={source}/>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: 40,
-        height: 40,
-        borderRadius: 20
-    }
 })
 
 export default Avatar;
