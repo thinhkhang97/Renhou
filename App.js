@@ -14,11 +14,13 @@ import Bill from './src/components/Bill';
 import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
 import Global from './src/Global';
+import UserProfile from "./src/screen/userProfile";
 
 const AppNavigator = createStackNavigator({
   Home,
   RoomDetail,
   Bill,
+  UserProfile
 },
   {
     defaultNavigationOptions: {
@@ -53,15 +55,5 @@ const styles = StyleSheet.create({
   },
 });
 
-const roomStack = createStackNavigator({
-  app: {
-    screen: App
-  },
-  roomDetail: {
-    screen: RoomDetail
-  }
-},{
-  initialRouteName: "app"
-});
 
-export default createAppContainer(roomStack);
+export default App;
