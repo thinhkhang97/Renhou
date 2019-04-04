@@ -8,6 +8,11 @@ class Bill extends Component {
         const date = navigation.getParam('date', new Date());
         return {
             title: 'Hóa đơn ' + (date.getMonth() + 1).toString() + '/' + date.getFullYear().toString(),
+            headerRight: (
+                <TouchableOpacity>
+                    <Text style={styles.headerRightButton}>Sửa</Text>
+                </TouchableOpacity>
+            ),
             headerStyle: {
                 backgroundColor: 'white',
             },
@@ -116,10 +121,15 @@ const styles = StyleSheet.create({
         color: Global.COLOR.GRAY,
         fontSize: 14,
     },
+    headerRightButton: {
+        marginRight: 16,
+        fontSize: 16,
+        color: Global.COLOR.NAVIGATION,
+        fontWeight: 'bold',
+    }
 });
 
 const mapStateToProps = (state) => ({
-    // history: state.calculateBillReducer.data,
 })
 
 export default connect(mapStateToProps)(Bill);
