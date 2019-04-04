@@ -40,7 +40,9 @@ export default class AllBill extends React.Component {
                             )
                         }} />
                 </ScrollView>
-                <TouchableOpacity style={styles.footer}><Icon name='ios-add-circle' size={60} color='red' /></TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('CalculateBill', {
+                      roomID: this.props.navigation.getParam('roomID', -1),
+                })} style={styles.footer}><Icon name='ios-add-circle' size={60} color='red' /></TouchableOpacity>
             </View>
         );
     }

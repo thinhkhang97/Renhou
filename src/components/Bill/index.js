@@ -68,7 +68,7 @@ class Bill extends Component {
                     <View style={styles.data}><Text style={styles.dataText}>100 000</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.lineStyle} />
+                    <View style={Global.styles.lineStyle} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.label}>Tổng tiền</Text>
@@ -79,8 +79,8 @@ class Bill extends Component {
                     <View style={styles.data}><Text style={styles.dataText}>Chưa thanh toán</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Thanh toán</Text>
+                    <TouchableOpacity style={Global.styles.button}>
+                        <Text style={Global.styles.buttonText}>Thanh toán</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -93,8 +93,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        // justifyContent: 'flex-start',
-        // alignItems: 'flex-start',
         backgroundColor: Global.COLOR.BACKGROUND,
     },
     row: {
@@ -117,25 +115,6 @@ const styles = StyleSheet.create({
     dataText: {
         color: Global.COLOR.GRAY,
         fontSize: 14,
-    },
-    lineStyle: {
-        flex: 1,
-        borderBottomWidth: 2,
-        borderColor: '#848484',
-        paddingVertical: 5,
-    },
-    button: {
-        flex: 1,
-        marginTop: 20,
-        paddingVertical: 15,
-        borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Global.COLOR.NAVIGATION,
-    },
-    buttonText: {
-        fontSize: 20,
-        color: 'white',
     },
 });
 

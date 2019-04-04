@@ -39,9 +39,9 @@ const AppContainer = createAppContainer(AppNavigator);
 
 
 class App extends Component {
-  
+
   render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <AppContainer />

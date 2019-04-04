@@ -8,17 +8,20 @@ import InfoCard from '../../infoCard';
 
 const data = [
     {
-    name: "Khang Thinh Nguyen",
-    phoneNumber: "0123 9238 922"
-},
-{
-    name: "Linh Huu Nguyen",
-    phoneNumber: "0123 938 922"
-},
-{
-    name: "Khoa Do",
-    phoneNumber: "0123 938 922"
-},
+        key: '0',
+        name: "Khang Thinh Nguyen",
+        phoneNumber: "0123 9238 922"
+    },
+    {
+        key: '1',
+        name: "Linh Huu Nguyen",
+        phoneNumber: "0123 938 922"
+    },
+    {
+        key: '2',
+        name: "Khoa Do",
+        phoneNumber: "0123 938 922"
+    },
 ]
 export default class RoomDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -38,20 +41,19 @@ export default class RoomDetail extends React.Component {
         ],
     };
 
-    renderFirstRoute(){
+    renderFirstRoute() {
         return <FlatList
             data={data}
-            renderItem={({item, index})=>{
+            renderItem={({ item }) => {
                 return <InfoCard
-                key={index} 
-                title={item.name} 
-                subTitle={item.phoneNumber}
-                onPress={()=>{
-                    this.props.navigation.navigate("UserProfile", {data: item});
-                }}
+                    title={item.name}
+                    subTitle={item.phoneNumber}
+                    onPress={() => {
+                        this.props.navigation.navigate("UserProfile", { data: item });
+                    }}
                 />
-            }}
-            keyExtractor={({index})=>index}
+            }
+            }
         />
     }
 
@@ -60,7 +62,7 @@ export default class RoomDetail extends React.Component {
             <TabView
                 navigationState={this.state}
                 renderScene={SceneMap({
-                    first: ()=>this.renderFirstRoute(),
+                    first: () => this.renderFirstRoute(),
                     second: () => <AllBill navigation={this.props.navigation} />
                 })}
                 onIndexChange={index => this.setState({ index })}

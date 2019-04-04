@@ -1,57 +1,95 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Alert, View, TextInput, Button, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { calculate } from './CalculateBillAction';
+import Global from '../../../Global';
 
 class CalculateBill extends Component {
+    static navigationOptions = () => {
+        return {
+            title: 'Tính tiền nhà',
+            headerStyle: {
+                backgroundColor: 'white',
+            },
+            headerTitleStyle: {
+                color: Global.COLOR.NAVIGATION,
+            },
+            headerTintColor: Global.COLOR.NAVIGATION,
+        };
+    };
     constructor(props) {
         super(props);
         this.state = {
             water: '',
             electric: '',
             unitPrice: props.unitPrice,
+            roomPrice: '',
+            otherPrice: '',
         };
     }
     render() {
-        const { Price, calculate } = this.props;
-        const { water, electric, unitPrice } = this.state;
+        const { Price, calculate, navigation } = this.props;
+        const { water, electric, unitPrice, otherPrice, roomPrice } = this.state;
         return (
-            <View style={styles.container}>
-                <View style={{ width: '60%' }}>
-                    <View style={styles.form}>
-                        <Text style={styles.text}>Chỉ số điện mới</Text>
-                        <TextInput style={[styles.input, { height: 'auto' }]} returnKeyType='done' keyboardType='number-pad' value={electric} placeholder='Chỉ số điện mới' onChangeText={(text) => this.setState({ electric: text })} />
-                        <Text style={styles.text}>Chỉ số nuớc mới</Text>
-                        <TextInput style={styles.input} keyboardType='number-pad' returnKeyType='done' value={water} placeholder='Chỉ số nước mới' onChangeText={(text) => this.setState({ water: text })} />
-                        <Text style={styles.text}>Đơn giá nước</Text>
-                        <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={unitPrice} placeholder='Đơn giá nước' onChangeText={(text) => this.setState({ unitPrice: text })} />
-                    </View>
+            <ScrollView contentContainerStyle={{
+                alignItems: 'center',
+            }} style={styles.container}>
+                <View style={styles.row}>
+                    <Text style={styles.text}>Chỉ số điện mới</Text>
                 </View>
-                <View style={{ width: '60%' }}>
-                    <View style={styles.form}>
-                        <Button title='Tính tiền' onPress={() => {
-                            calculate({month: 4, year: 2014, electric, water, unitPrice });
-                            // const electric = {};
-                            // electric.used = parseInt(this.state.Electric.new, 10) - parseInt(this.state.Electric.old, 10);
-                            // electric.price = calculateElectric(electric.used, this.state.Electric.unit, this.state.Electric.limit);
-                            // const water = {};
-                            // water.used = parseInt(this.state.Water.new, 10) - parseInt(this.state.Water.old, 10);
-                            // water.price = water.used * this.state.Water.unitPrice;
-                            // this.setState({ ...this.state, Price: { electric, water } });
-                        }}></Button>
-                        {Price ? (
-                            <View>
-                                <Text style={[styles.text, { marginTop: 10 }]}>Điện năng tiêu thụ: {Price.electric.used} kWh</Text>
-                                <Text style={styles.text}>Tiền điện: {Price.electric.price} đồng</Text>
-                                <Text style={styles.text}>Thuế VAT: {Math.round(Price.electric.price * 0.1)} đồng</Text>
-                                <Text style={styles.text}>Nước tiêu thụ: {Price.water.used} &#13221;</Text>
-                                <Text style={styles.text}>Tiền nước: {Math.round(Price.water.price)} đồng</Text>
-                                <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(Price.totalPrice)} đồng</Text>
-                            </View>
-                        ) : undefined}
-                    </View>
+                <View style={styles.row}>
+                    <TextInput style={[styles.input, { height: 'auto' }]} returnKeyType='done' keyboardType='number-pad' value={electric} placeholder='Chỉ số điện mới' onChangeText={(text) => this.setState({ electric: text })} />
                 </View>
-            </View >
+                <View style={styles.row}>
+                    <View style={Global.styles.lineStyle} />
+                </View>
+                <View style={styles.row}>
+                    <Text style={styles.text}>Chỉ số nuớc mới</Text>
+                </View>
+                <View style={styles.row}>
+                    <TextInput style={styles.input} keyboardType='number-pad' returnKeyType='done' value={water} placeholder='Chỉ số nước mới' onChangeText={(text) => this.setState({ water: text })} />
+                </View>
+                <View style={styles.row}>
+                    <Text style={styles.text}>Đơn giá nước</Text>
+                </View>
+                <View style={styles.row}>
+                    <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={unitPrice} placeholder='Đơn giá nước' onChangeText={(text) => this.setState({ unitPrice: text })} />
+                </View>
+                <View style={styles.row}>
+                    <View style={Global.styles.lineStyle} />
+                </View>
+                <View style={styles.row}>
+                    <Text style={styles.text}>Tiền phòng</Text>
+                </View>
+                <View style={styles.row}>
+                    <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={roomPrice} placeholder='Tiền phòng' onChangeText={(text) => this.setState({ roomPrice: text })} />
+                </View>
+                <View style={styles.row}>
+                    <Text style={styles.text}>Tiền khác</Text>
+                </View>
+                <View style={styles.row}>
+                    <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={otherPrice} placeholder='Tiền khác' onChangeText={(text) => this.setState({ otherPrice: text })} />
+                </View>
+                <View style={styles.row}>
+                    <TouchableOpacity onPress={() => {
+                        calculate({ month: 4, year: 2014, electric, water, unitPrice });
+                    }} style={Global.styles.button}>
+                        <Text style={Global.styles.buttonText}>Tạo hóa đơn</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.row}>
+                    {Price ? (
+                        <View>
+                            <Text style={[styles.text, { marginTop: 10 }]}>Điện năng tiêu thụ: {Price.electric.used} kWh</Text>
+                            <Text style={styles.text}>Tiền điện: {Price.electric.price} đồng</Text>
+                            <Text style={styles.text}>Thuế VAT: {Math.round(Price.electric.price * 0.1)} đồng</Text>
+                            <Text style={styles.text}>Nước tiêu thụ: {Price.water.used} &#13221;</Text>
+                            <Text style={styles.text}>Tiền nước: {Math.round(Price.water.price)} đồng</Text>
+                            <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(Price.totalPrice)} đồng</Text>
+                        </View>
+                    ) : undefined}
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -60,28 +98,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Global.COLOR.BACKGROUND,
+        paddingVertical: 10,
     },
-    form: {
-        marginRight: 10,
-        flexDirection: 'column',
-        justifyContent: 'center',
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '80%',
     },
     input: {
-        width: '100%',
+        flex: 1,
+        paddingVertical: 5,
+        fontSize: 18,
         textAlign: 'center',
-        fontSize: 14,
-        borderRightWidth: 2,
-        borderLeftWidth: 2,
-        borderTopWidth: 2,
-        borderBottomWidth: 2,
+        borderRadius: 12,
+        backgroundColor: Global.COLOR.BORDERBACKGROUND,
     },
     text: {
-        fontSize: 14,
+        fontSize: 18,
         textAlign: 'left',
-        marginBottom: 10,
+        marginVertical: 10,
     }
 });
 
