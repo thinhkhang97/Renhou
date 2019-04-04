@@ -7,6 +7,23 @@ class SignIn extends React.Component {
 
     static navigationOptions = {header: null}
 
+    onPressSignUp = () => {
+        const {navigation} = this.props;
+        navigation.navigate("SignUp");
+    }
+
+    onPressSignIn = () => {
+        /// do something here before navigating
+        const {navigation} = this.props;
+        navigation.navigate("App");
+    }
+
+    onPressForgetPassword = () => {
+        /// do something here before navigating
+        const {navigation} = this.props;
+        navigation.navigate("ForgetPassword");
+    }
+
     render() {
         return(
             <SafeAreaView style={styles.container}>
@@ -16,9 +33,9 @@ class SignIn extends React.Component {
                 </View>
                 <Input placeholder="Địa chỉ email"/>
                 <Input placeholder="Mật khẩu" secure/>
-                <MainButton title="Đăng nhập"/>
-                <TextButton title="Quên mật khẩu?"/>
-                <TextButton title="Đăng ký tài khoản" color={GLOBAL.COLOR.MAINCOLOR}/>
+                <MainButton title="Đăng nhập" onPress={this.onPressSignIn}/>
+                <TextButton title="Quên mật khẩu?" onPress={this.onPressForgetPassword}/>
+                <TextButton title="Đăng ký tài khoản" color={GLOBAL.COLOR.MAINCOLOR} onPress={this.onPressSignUp}/>
             </SafeAreaView>
         )
     }

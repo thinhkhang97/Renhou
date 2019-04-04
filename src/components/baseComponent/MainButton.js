@@ -6,7 +6,7 @@ class MainButton extends React.Component {
     render() {
         const {title} = this.props;
         return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={()=>this.props.onPress()}>
                 <Text style={styles.text}>{title}</Text>
             </TouchableOpacity>
         )
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 28,
         justifyContent: "center",
         alignItems: "center",
-        margin: 16
+        marginVertical: 16
     },
     text: {
         color: GLOBAL.COLOR.WHITE,
