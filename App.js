@@ -9,7 +9,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import CalculateBill from './src/components/CalculateBill';
+import CalculateBill from './src/components/Bill/CalculateBill';
 import Bill from './src/components/Bill';
 import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
@@ -20,7 +20,8 @@ const AppNavigator = createStackNavigator({
   Home,
   RoomDetail,
   Bill,
-  UserProfile
+  UserProfile,
+  CalculateBill,
 },
   {
     defaultNavigationOptions: {
