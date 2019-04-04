@@ -56,7 +56,6 @@ class RoomInfoDetail extends Component {
                     <Text style={styles.text}>Email</Text>
                     <Text style={styles.data}>nguyenvana@gmail.com</Text>
                 </View>
-
             </ScrollView >
         );
     }

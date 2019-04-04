@@ -5,7 +5,7 @@ import ListRoom from '../Room/ListRoom'
 import Global from '../../Global';
 
 const SecondRoute = () => (
-    <View style={[styles.container, { backgroundColor: '#673ab7' }]} />
+    <Text>Coming soon</Text>
 );
 export default class Home extends React.Component {
     static navigationOptions = {

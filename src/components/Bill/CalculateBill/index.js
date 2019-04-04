@@ -20,8 +20,6 @@ class CalculateBill extends Component {
     state = {
         water: '',
         electric: '',
-        unitPrice: props.unitPrice,
-        roomPrice: '',
         otherPrice: '',
     };
     render() {
@@ -40,20 +38,11 @@ class CalculateBill extends Component {
                     <TextInput style={[styles.input, { height: 'auto' }]} returnKeyType='done' keyboardType='number-pad' value={electric} placeholder='Chỉ số điện mới' onChangeText={(text) => this.setState({ electric: text })} />
                 </View>
                 <View style={styles.row}>
-                    <View style={Global.styles.lineStyle} />
-                </View>
-                <View style={styles.row}>
                     <Text style={styles.text}>Chỉ số nuớc mới</Text>
                 </View>
                 <View style={styles.row}>
                     <TextInput style={styles.input} keyboardType='number-pad' returnKeyType='done' value={water} placeholder='Chỉ số nước mới' onChangeText={(text) => this.setState({ water: text })} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.text}>Đơn giá nước</Text>
-                </View>
-                <View style={styles.row}>
-                    <TextInput style={styles.input} keyboardType='numeric' returnKeyType='done' value={unitPrice} placeholder='Đơn giá nước' onChangeText={(text) => this.setState({ unitPrice: text })} />
-                </View>
+                </View>                
                 <View style={styles.row}>
                     <View style={Global.styles.lineStyle} />
                 </View>
@@ -76,7 +65,7 @@ class CalculateBill extends Component {
                         <Text style={Global.styles.buttonText}>Tạo hóa đơn</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.row}>
+                {/* <View style={styles.row}>
                     {Price ? (
                         <View>
                             <Text style={[styles.text, { marginTop: 10 }]}>Điện năng tiêu thụ: {Price.electric.used} kWh</Text>
@@ -87,7 +76,7 @@ class CalculateBill extends Component {
                             <Text style={[styles.text, { fontWeight: 'bold', fontSize: 16 }]}>Tổng cộng: {Math.round(Price.totalPrice)} đồng</Text>
                         </View>
                     ) : undefined}
-                </View>
+                </View> */}
             </ScrollView >
         );
     }
@@ -101,9 +90,10 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     row: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        width: '80%',
+        marginHorizontal: 20,
     },
     input: {
         flex: 1,
@@ -114,6 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: Global.COLOR.BORDERBACKGROUND,
     },
     text: {
+        flex: 1,
         fontSize: 18,
         textAlign: 'left',
         marginVertical: 10,

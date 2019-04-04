@@ -10,7 +10,7 @@ export default class AllBill extends React.Component {
     render() {
         let date = [];
         let data = [];
-        for (i = 0; i < 30; i++) {
+        for (i = 0; i < 15; i++) {
             date.push(new Date(2019, 0, i + 1));
             data.push({
                 key: date[i].toString(),

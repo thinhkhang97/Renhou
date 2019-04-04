@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Text, TouchableHighlight, Button, Alert } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
 import PopupMenu from './PopupMenu';
@@ -27,6 +27,7 @@ export default class RoomDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: 'Phòng ' + navigation.getParam('roomID', 'No room ID'),
+            headerTintColor: 'white',
             headerRight: (
                 <PopupMenu navigation={navigation} />
             ),
@@ -64,7 +65,7 @@ export default class RoomDetail extends React.Component {
                 renderScene={SceneMap({
                     first: () => this.renderFirstRoute(),
                     second: () => <AllBill navigation={this.props.navigation} />,
-                    third: () => <View />,
+                    third: () =>  <Text>Coming soon</Text>,
                 })}
                 onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
