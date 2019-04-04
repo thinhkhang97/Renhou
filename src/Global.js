@@ -5,7 +5,8 @@ export default {
     GRAY: '#a1a1a1',
     BORDERBACKGROUND: '#F0F0F0',
     WHITE: 'white',
-    BLACK: 'black'
+    BLACK: 'black',
+    MAINCOLOR: "#FD5739"
   },
   styles: {
     lineStyle: {
