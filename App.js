@@ -15,6 +15,7 @@ import Home from './src/components/Home';
 import RoomDetail from './src/components/Room/RoomDetail';
 import Global from './src/Global';
 import UserProfile from "./src/screen/userProfile";
+import RoomInfoDetail from './src/components/Room/RoomDetail/RoomInfoDetail'
 
 const AppNavigator = createStackNavigator({
   Home,
@@ -22,6 +23,7 @@ const AppNavigator = createStackNavigator({
   Bill,
   UserProfile,
   CalculateBill,
+  RoomInfoDetail,
 },
   {
     defaultNavigationOptions: {

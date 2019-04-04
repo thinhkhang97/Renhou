@@ -7,9 +7,13 @@ export default class PopupMenu extends Component {
   _menu = null;
 
   hideMenu = () => {
+    const { navigation } = this.props;
+    navigation.navigate('RoomInfoDetail', {
+      roomID: navigation.getParam('roomID', -1),
+    })
     this._menu.hide();
   };
- 
+
   showMenu = () => {
     this._menu.show();
   };

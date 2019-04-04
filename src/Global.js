@@ -2,7 +2,7 @@ export default {
   COLOR: {
     NAVIGATION: '#FF6347',
     BACKGROUND: '#F5FCFF',
-    GRAY: '#808080',
+    GRAY: '#a1a1a1',
     BORDERBACKGROUND: '#F0F0F0',
     WHITE: 'white',
     BLACK: 'black'
@@ -10,8 +10,8 @@ export default {
   styles: {
     lineStyle: {
       flex: 1,
-      borderBottomWidth: 2,
-      borderColor: '#848484',
+      borderBottomWidth: 0.5,
+      borderColor: '#b1b1b1',
       paddingVertical: 10,
     },
     button: {

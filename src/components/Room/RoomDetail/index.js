@@ -28,7 +28,7 @@ export default class RoomDetail extends React.Component {
         return {
             title: 'Phòng ' + navigation.getParam('roomID', 'No room ID'),
             headerRight: (
-                <PopupMenu />
+                <PopupMenu  navigation={navigation}/>
             ),
         };
     };

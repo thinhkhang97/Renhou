@@ -17,23 +17,22 @@ class CalculateBill extends Component {
             headerTintColor: Global.COLOR.NAVIGATION,
         };
     };
-    constructor(props) {
-        super(props);
-        this.state = {
-            water: '',
-            electric: '',
-            unitPrice: props.unitPrice,
-            roomPrice: '',
-            otherPrice: '',
-        };
-    }
+    state = {
+        water: '',
+        electric: '',
+        unitPrice: props.unitPrice,
+        roomPrice: '',
+        otherPrice: '',
+    };
     render() {
         const { Price, calculate, navigation } = this.props;
+        const roomID = navigation.getParam('roomID', -1);
         const { water, electric, unitPrice, otherPrice, roomPrice } = this.state;
         return (
             <ScrollView contentContainerStyle={{
                 alignItems: 'center',
             }} style={styles.container}>
+                <Text>Phòng {roomID}</Text>
                 <View style={styles.row}>
                     <Text style={styles.text}>Chỉ số điện mới</Text>
                 </View>
@@ -89,7 +88,7 @@ class CalculateBill extends Component {
                         </View>
                     ) : undefined}
                 </View>
-            </ScrollView>
+            </ScrollView >
         );
     }
 }
