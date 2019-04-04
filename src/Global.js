@@ -4,5 +4,7 @@ export default {
       BACKGROUND: '#F5FCFF',
       GRAY: '#808080',
       BORDERBACKGROUND: '#F0F0F0',
+      WHITE: 'white',
+      BLACK: 'black'
     },
   };

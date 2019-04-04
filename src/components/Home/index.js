@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { SafeAreaView } from "react-navigation";
 import ListRoom from '../Room/ListRoom'
 import Global from '../../Global';
 
