@@ -6,7 +6,7 @@ class TextButton extends React.Component {
     render() {
         const {title, color} = this.props;
         return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={()=>this.props.onPress()}>
                 <Text style={[styles.text,{color}]}>{title}</Text>
             </TouchableOpacity>
         )

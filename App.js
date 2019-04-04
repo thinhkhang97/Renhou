@@ -18,9 +18,13 @@ import UserProfile from "./src/screen/userProfile";
 import RoomInfoDetail from './src/components/Room/RoomDetail/RoomInfoDetail';
 import AddRoom from './src/components/Room/AddRoom';
 import SignIn from "./src/screen/signIn";
+import SignUp from "./src/screen/signUp";
+import ForgetPassword from "./src/screen/forgetPassword";
 
 const AuthenticationStack = createStackNavigator({
-  SignIn
+  SignIn,
+  SignUp,
+  ForgetPassword
 },
 {
   initialRouteName: "SignIn"
