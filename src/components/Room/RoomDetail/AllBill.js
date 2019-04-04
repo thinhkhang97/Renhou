@@ -25,7 +25,7 @@ export default class AllBill extends React.Component {
                     <FlatList data={data}
                         renderItem={({ item }) => {
                             return (
-                                <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('Bill', {
+                                <TouchableOpacity style={styles.bill} onPress={() => this.props.navigation.navigate('Bill', {
                                     roomID: this.props.navigation.getParam('roomID', -1),
                                     date: item.date,
                                 })}>
@@ -42,7 +42,7 @@ export default class AllBill extends React.Component {
                 </ScrollView>
                 <TouchableOpacity onPress={()=>this.props.navigation.navigate('CalculateBill', {
                       roomID: this.props.navigation.getParam('roomID', -1),
-                })} style={styles.footer}><Icon name='ios-add-circle' size={60} color='red' /></TouchableOpacity>
+                })} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
             </View>
         );
     }
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: Global.COLOR.BACKGROUND,
         flex: 1,
     },
-    room: {
+    bill: {
         marginBottom: 15,
         paddingVertical: 5,
         paddingHorizontal: 10,

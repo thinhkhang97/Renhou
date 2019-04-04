@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { SafeAreaView } from "react-navigation";
 import ListRoom from '../Room/ListRoom'
 import Global from '../../Global';
 
@@ -10,14 +9,14 @@ const SecondRoute = () => (
 );
 export default class Home extends React.Component {
     static navigationOptions = {
-        title: 'Home',
+        title: 'Tất cả phòng',
     };
     state = {
         index: 0,
         routes: [
             { key: 'first', title: 'Đã cho thuê' },
             { key: 'second', title: 'Còn trống' },
-            // { key: 'third', title: 'Chưa trả tiền' },
+            { key: 'third', title: 'Chưa trả tiền' },
         ],
     };
     render() {
@@ -27,6 +26,7 @@ export default class Home extends React.Component {
                 renderScene={SceneMap({
                     first: () => <ListRoom navigation={this.props.navigation} />,
                     second: SecondRoute,
+                    third: SecondRoute,
                 })}
                 onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
@@ -34,6 +34,9 @@ export default class Home extends React.Component {
                         {...props}
                         style={styles.tabBar}
                         indicatorStyle={{ backgroundColor: '#1E90FF' }}
+                        renderLabel={({ route }) => (
+                            <Text style={styles.tabLabel}>{route.title}</Text>
+                        )}
                     />
                 }
             />
@@ -55,5 +58,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 16,
+    },
+    tabLabel: {
+        fontSize: 14,
+        color: 'white'
     },
 });

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Global from '../../Global';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class ListRoom extends React.Component {
     state = {
@@ -8,21 +9,24 @@ export default class ListRoom extends React.Component {
     };
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <FlatList data={[{ key: '2' }, { key: '3' }]}
-                    renderItem={({ item }) => {
-                        return (
-                            <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
-                                roomID: item.key,
-                            })}>
-                                <View style={styles.item}>
-                                    <Text style={styles.text}>Phòng {item.key}</Text>
-                                    <Text style={styles.date}>February 3</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }} />
-            </ScrollView>
+            <View style={styles.container}>
+                <ScrollView style={{ paddingTop: 20 }}>
+                    <FlatList data={[{ key: '2' }, { key: '3' }]}
+                        renderItem={({ item }) => {
+                            return (
+                                <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
+                                    roomID: item.key,
+                                })}>
+                                    <View style={styles.item}>
+                                        <Text style={styles.text}>Phòng {item.key}</Text>
+                                        <Text style={styles.date}>February 3</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        }} />
+                </ScrollView>
+                <TouchableOpacity onPress={() => console.log('press')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
+            </View>
         );
     }
 }
@@ -31,7 +35,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Global.COLOR.BACKGROUND,
         flex: 1,
-        paddingTop: 20,
     },
     room: {
         marginBottom: 15,
@@ -53,5 +56,11 @@ const styles = StyleSheet.create({
     date: {
         flex: 2,
         textAlign: 'right'
+    },
+    footer: {
+        flexDirection: 'column',
+        alignSelf: 'flex-end',
+        marginVertical: 10,
+        marginRight: 20,
     }
 });

@@ -28,7 +28,7 @@ export default class RoomDetail extends React.Component {
         return {
             title: 'Phòng ' + navigation.getParam('roomID', 'No room ID'),
             headerRight: (
-                <PopupMenu  navigation={navigation}/>
+                <PopupMenu navigation={navigation} />
             ),
         };
     };
@@ -37,7 +37,7 @@ export default class RoomDetail extends React.Component {
         routes: [
             { key: 'first', title: 'Người thuê' },
             { key: 'second', title: 'Tất cả hoá đơn' },
-            // { key: 'third', title: 'Chưa trả tiền' },
+            { key: 'third', title: 'Nội thất' },
         ],
     };
 
@@ -63,7 +63,8 @@ export default class RoomDetail extends React.Component {
                 navigationState={this.state}
                 renderScene={SceneMap({
                     first: () => this.renderFirstRoute(),
-                    second: () => <AllBill navigation={this.props.navigation} />
+                    second: () => <AllBill navigation={this.props.navigation} />,
+                    third: () => <View />,
                 })}
                 onIndexChange={index => this.setState({ index })}
                 renderTabBar={props =>
@@ -71,6 +72,9 @@ export default class RoomDetail extends React.Component {
                         {...props}
                         style={styles.tabBar}
                         indicatorStyle={{ backgroundColor: '#1E90FF' }}
+                        renderLabel={({ route }) => (
+                            <Text style={styles.tabLabel}>{route.title}</Text>
+                        )}
                     />
                 }
             />
@@ -89,5 +93,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 16,
+    },
+    tabLabel: {
+        fontSize: 14,
+        color: 'white'
     },
 });
