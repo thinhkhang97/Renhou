@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import CalculateBill from './src/components/Bill/CalculateBill';
 import Bill from './src/components/Bill';
 import Home from './src/components/Home';
@@ -17,6 +17,18 @@ import Global from './src/Global';
 import UserProfile from "./src/screen/userProfile";
 import RoomInfoDetail from './src/components/Room/RoomDetail/RoomInfoDetail';
 import AddRoom from './src/components/Room/AddRoom';
+import SignIn from "./src/screen/signIn";
+import SignUp from "./src/screen/signUp";
+import ForgetPassword from "./src/screen/forgetPassword";
+
+const AuthenticationStack = createStackNavigator({
+  SignIn,
+  SignUp,
+  ForgetPassword
+},
+{
+  initialRouteName: "SignIn"
+})
 
 const AppNavigator = createStackNavigator({
   Home,
@@ -26,6 +38,7 @@ const AppNavigator = createStackNavigator({
   CalculateBill,
   RoomInfoDetail,
   AddRoom,
+
 },
   {
     defaultNavigationOptions: {
@@ -39,7 +52,15 @@ const AppNavigator = createStackNavigator({
       headerBackTitle: null,
     },
   });
-const AppContainer = createAppContainer(AppNavigator);
+
+const AppSwitchNavigator = createSwitchNavigator({
+  Auth: AuthenticationStack,
+  App: AppNavigator
+},
+{
+  initialRouteName: "Auth"
+})
+const AppContainer = createAppContainer(AppSwitchNavigator);
 
 
 class App extends Component {
