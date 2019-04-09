@@ -15,18 +15,6 @@ export default {
       borderColor: '#b1b1b1',
       paddingVertical: 10,
     },
-    button: {
-      flex: 1,
-      marginTop: 20,
-      paddingVertical: 15,
-      borderRadius: 15,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#FF6347',
-    },
-    buttonText: {
-      fontSize: 20,
-      color: 'white',
-    },
   },
+  host: 'http://localhost:3000',
 };

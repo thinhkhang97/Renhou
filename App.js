@@ -53,12 +53,15 @@ const AppNavigator = createStackNavigator({
     },
   });
 
-const AppSwitchNavigator = createSwitchNavigator({
+const AppSwitchNavigator = createStackNavigator({
   Auth: AuthenticationStack,
   App: AppNavigator
 },
 {
-  initialRouteName: "Auth"
+  initialRouteName: "Auth",
+  defaultNavigationOptions: {
+    header: null,
+  }
 })
 const AppContainer = createAppContainer(AppSwitchNavigator);
 
@@ -66,7 +69,6 @@ const AppContainer = createAppContainer(AppSwitchNavigator);
 class App extends Component {
 
   render() {
-    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <AppContainer />
