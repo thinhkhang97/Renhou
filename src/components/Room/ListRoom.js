@@ -39,9 +39,7 @@ export default class ListRoom extends React.Component {
                         }} 
                         keyExtractor={item => item._id} />
                 </ScrollView>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('AddRoom', {
-                    roomID: '4',
-                })} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('AddRoom')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
             </View>
         );
     }
