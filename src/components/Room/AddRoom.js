@@ -28,6 +28,21 @@ class AddRoom extends Component {
         perElectricCost: '',
         perWaterCost: '',
     };
+    handleCreate = () => {
+        const userId = '5ca46e712c76681518568bc5'
+        const url = Global.host + '/room';
+        axios.post(url, {
+            userId,
+            name: this.state.name,
+            address: this.state.address,
+            roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
+            perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
+            perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
+        }).then(res => {
+            console.log(res);
+            navigation.goBack();
+        });
+    }
     render() {
         const { navigation } = this.props;
         return (
@@ -61,21 +76,7 @@ class AddRoom extends Component {
                         this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
-                <MainButton title='Tạo phòng' onPress={() => {
-                    const userId = '5ca46e712c76681518568bc5'
-                    const url = Global.host + '/room';
-                    axios.post(url, {
-                        userId,
-                        name: this.state.name,
-                        address: this.state.address,
-                        roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
-                        perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
-                        perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
-                    }).then(res => {
-                        console.log(res);
-                        navigation.goBack();
-                    });
-                }} />
+                <MainButton title='Tạo phòng' onPress={this.handleCreate} />
             </ScrollView >
         );
     }

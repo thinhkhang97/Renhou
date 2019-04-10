@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Global from '../../../Global';
+import axios from 'axios';
 
 class RoomInfoDetail extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -34,6 +35,18 @@ class RoomInfoDetail extends Component {
     }
     componentDidMount() {
         const { navigation } = this.props;
+        const roomID = navigation.getParam('roomID');
+        const url = Global.host + '/room/' + roomID;
+        axios.get(url).then(res => {
+            const resData = res.data;
+            this.setState({
+                name: resData.data.room.name,
+                address: resData.data.room.address,
+                roomCost: this.styleMoney(resData.data.rule.roomCost),
+                perElectricCost: this.styleMoney(resData.data.rule.perElectricCost),
+                perWaterCost: this.styleMoney(resData.data.rule.perWaterCost),
+            })
+        });
         navigation.setParams({
             editable: 'Sửa',
             handleEdit: () => {
@@ -41,13 +54,25 @@ class RoomInfoDetail extends Component {
                     navigation.setParams({
                         editable: 'Lưu',
                     });
-                else
+                else {
+                    this.handleEdit(roomID);
                     navigation.setParams({
                         editable: 'Sửa',
                     });
+                }
                 this.setState({ editable: !this.state.editable });
             }
         });
+    }
+    handleEdit(roomId) {
+        const url = Global.host + '/room/feecost';
+        axios.put(url, {
+            roomId,
+            address: this.state.address,
+            roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
+            perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
+            perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
+        }).then().catch(error => console.log(error));
     }
     styleMoney(money) {
         return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
