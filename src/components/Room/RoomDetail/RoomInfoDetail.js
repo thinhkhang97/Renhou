@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { View, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Global from '../../../Global';
 
 class RoomInfoDetail extends Component {
-    static navigationOptions = () => {
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state;
         return {
             title: 'Chi tiết phòng',
             headerRight: (
-                <TouchableOpacity>
-                    <Text style={styles.headerRightButton}>Sửa</Text>
+                <TouchableOpacity onPress={() => params.handleEdit()}>
+                    <Text style={styles.headerRightButton}>{params.editable}</Text>
                 </TouchableOpacity>
             ),
             headerStyle: {
@@ -20,41 +21,70 @@ class RoomInfoDetail extends Component {
             headerTintColor: Global.COLOR.NAVIGATION,
         };
     };
-    state = {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            editable: false,
+            name: '',
+            address: '',
+            roomCost: '',
+            perElectricCost: '',
+            perWaterCost: '',
+        }
+    }
+    componentDidMount() {
+        const { navigation } = this.props;
+        navigation.setParams({
+            editable: 'Sửa',
+            handleEdit: () => {
+                if (!this.state.editable)
+                    navigation.setParams({
+                        editable: 'Lưu',
+                    });
+                else
+                    navigation.setParams({
+                        editable: 'Sửa',
+                    });
+                this.setState({ editable: !this.state.editable });
+            }
+        });
+    }
+    styleMoney(money) {
+        return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
     render() {
         const { navigation } = this.props;
-        const roomID = navigation.getParam('roomID', -1);
+        const name = navigation.getParam('name');
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.row}>
                     <Text style={styles.text}>Tên phòng</Text>
-                    <Text style={styles.data}>Phòng {roomID}</Text>
+                    <Text style={styles.data}>{name}</Text>
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Địa chỉ</Text>
-                    <Text style={styles.data}>227 Nguyễn Văn Cừ</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} value={this.state.address} onChangeText={text => this.setState({ address: text })} />
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.text}>Tên người thuê</Text>
-                    <Text style={styles.data}>Nguyễn Văn A</Text>
+                    <Text style={styles.text}>Giá phòng</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.roomCost} onChangeText={text => {
+                        const intMoney = parseInt(text.replace(/\./g, ''), 10);
+                        this.setState({ roomCost: text === '' ? '' : this.styleMoney(intMoney) })
+                    }} />
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.text}>Số điện thoại</Text>
-                    <Text style={styles.data}>0987654321</Text>
+                    <Text style={styles.text}>Đơn giá điện</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.perElectricCost} onChangeText={text => {
+                        const intMoney = parseInt(text.replace(/\./g, ''), 10);
+                        this.setState({ perElectricCost: text === '' ? '' : this.styleMoney(intMoney) })
+                    }} />
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.text}>Ngày sinh</Text>
-                    <Text style={styles.data}>01/01/1997</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.text}>CMND</Text>
-                    <Text style={styles.data}>123456789</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.text}>Email</Text>
-                    <Text style={styles.data}>nguyenvana@gmail.com</Text>
+                    <Text style={styles.text}>Đơn giá nước</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.perWaterCost} onChangeText={text => {
+                        const intMoney = parseInt(text.replace(/\./g, ''), 10);
+                        this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
+                    }} />
                 </View>
             </ScrollView >
         );

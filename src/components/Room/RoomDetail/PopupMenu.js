@@ -6,10 +6,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 export default class PopupMenu extends Component {
   _menu = null;
 
-  hideMenu = () => {
+  pressMenu = () => {
     const { navigation } = this.props;
     navigation.navigate('RoomInfoDetail', {
-      roomID: navigation.getParam('roomID', -1),
+      roomID: navigation.getParam('roomID'),
+      name: navigation.getParam('name')
     })
     this._menu.hide();
   };
@@ -24,7 +25,7 @@ export default class PopupMenu extends Component {
           ref={ref => this._menu = ref}
           button={<Text onPress={this.showMenu}><Icon name='ellipsis-v' size={20} color='white' /></Text>}
         >
-          <MenuItem onPress={this.hideMenu}>Chi tiết phòng</MenuItem>
+          <MenuItem onPress={this.pressMenu}>Chi tiết phòng</MenuItem>
         </Menu>
       </View>
     );
