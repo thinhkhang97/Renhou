@@ -4,7 +4,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
 import PopupMenu from './PopupMenu';
 import Global from '../../../Global';
-import InfoCard from '../../infoCard';
+import InfoCard from '../../../components/infoCard';
 
 const data = [
     {

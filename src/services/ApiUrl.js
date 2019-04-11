@@ -3,5 +3,8 @@ export const HOST = {
 }
 
 export const SERVICE = {
-    room: "/room"
+    room: "/room",
+    allRoom: '/room/all/',
+    roomInfo: '/room/',
+    updateRoom: '/room/feecost'
 }

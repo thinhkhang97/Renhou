@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Global from '../../../Global';
-import axios from 'axios';
+import { roomServices } from '../../../services';
 
 class RoomInfoDetail extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -36,8 +36,7 @@ class RoomInfoDetail extends Component {
     componentDidMount() {
         const { navigation } = this.props;
         const roomID = navigation.getParam('roomID');
-        const url = Global.host + '/room/' + roomID;
-        axios.get(url).then(res => {
+        roomServices.roomInfo(roomID).then(res => {
             const resData = res.data;
             this.setState({
                 name: resData.data.room.name,
@@ -46,7 +45,7 @@ class RoomInfoDetail extends Component {
                 perElectricCost: this.styleMoney(resData.data.rule.perElectricCost),
                 perWaterCost: this.styleMoney(resData.data.rule.perWaterCost),
             })
-        });
+        }).catch(error => console.log(error));
         navigation.setParams({
             editable: 'Sửa',
             handleEdit: () => {
@@ -65,8 +64,7 @@ class RoomInfoDetail extends Component {
         });
     }
     handleEdit(roomId) {
-        const url = Global.host + '/room/feecost';
-        axios.put(url, {
+        roomServices.updateRoom({
             roomId,
             address: this.state.address,
             roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),

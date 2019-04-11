@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import calculateBillReducer from '../components/Bill/CalculateBill/CalculateBillReducer';
+import calculateBillReducer from '../screen/bill/CalculateBill/CalculateBillReducer';
 import storage from 'redux-persist/lib/storage';
 
 const calculateBillConfig = {

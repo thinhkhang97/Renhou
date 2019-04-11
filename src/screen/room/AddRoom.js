@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import Global from '../../Global';
-import { MainButton } from '../baseComponent'
+import { MainButton } from '../../components/baseComponent';
 import { roomServices } from "../../services";
 class AddRoom extends Component {
     static navigationOptions = () => {
@@ -35,7 +35,15 @@ class AddRoom extends Component {
         const _roomCost = parseInt(roomCost.replace(/\./g, ''), 10);
         const _perElectricCost = parseInt(perElectricCost.replace(/\./g, ''), 10);
         const _perWaterCost = parseInt(perWaterCost.replace(/\./g, ''), 10);
-        roomServices.addRoom(userId, name, address, _roomCost, _perElectricCost, _perWaterCost).then(res => {
+        const data = {
+            userId,
+            name,
+            address,
+            roomCost: _roomCost,
+            perElectricCost: _perElectricCost,
+            perWaterCost: _perWaterCost,
+        }
+        roomServices.addRoom(data).then(res => {
             navigation.goBack();
         });
     }

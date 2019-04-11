@@ -16,5 +16,4 @@ export default {
       paddingVertical: 10,
     },
   },
-  host: 'http://localhost:3000',
 };

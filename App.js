@@ -9,14 +9,14 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
-import CalculateBill from './src/components/Bill/CalculateBill';
+import CalculateBill from './src/screen/bill/CalculateBill';
 import Bill from './src/screen/bill';
 import Home from './src/screen/home';
-import RoomDetail from './src/components/Room/RoomDetail';
+import RoomDetail from './src/screen/room/RoomDetail';
 import Global from './src/Global';
 import UserProfile from "./src/screen/userProfile";
-import RoomInfoDetail from './src/components/Room/RoomDetail/RoomInfoDetail';
-import AddRoom from './src/components/Room/AddRoom';
+import RoomInfoDetail from './src/screen/room/RoomDetail/RoomInfoDetail';
+import AddRoom from './src/screen/room/AddRoom';
 import SignIn from "./src/screen/signIn";
 import SignUp from "./src/screen/signUp";
 import ForgetPassword from "./src/screen/forgetPassword";

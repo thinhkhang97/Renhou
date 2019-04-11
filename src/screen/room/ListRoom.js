@@ -2,20 +2,17 @@ import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
-import axios from 'axios';
+import { roomServices } from '../../services';
 
 export default class ListRoom extends React.Component {
     state = {
         room: [],
     };
     componentDidMount() {
-        const userID = '5ca46e712c76681518568bc5'
-        const url = Global.host + '/room/all/' + userID;
-        axios.get(url).then(res => {
+        const userID = '5ca46e712c76681518568bc5';
+        roomServices.listRoom(userID).then(res => {
             const data = res.data;
             this.setState({room: [...data.data]});
-        }).catch(error => {
-            console.log(error);
         })
     }
 
@@ -36,7 +33,7 @@ export default class ListRoom extends React.Component {
                                     </View>
                                 </TouchableOpacity>
                             )
-                        }} 
+                        }}
                         keyExtractor={item => item._id} />
                 </ScrollView>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('AddRoom')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
