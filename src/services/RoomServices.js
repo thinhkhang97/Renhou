@@ -1,5 +1,5 @@
-import {sendPost} from "./BaseHttpServices";
-import {HOST, SERVICE} from "./ApiUrl";
+import { sendPost } from "./BaseHttpServices";
+import { HOST, SERVICE } from "./ApiUrl";
 
 export function addRoom(userId, name, address, roomCost, perElectricCost, perWaterCost) {
     const body = {
@@ -10,5 +10,6 @@ export function addRoom(userId, name, address, roomCost, perElectricCost, perWat
         perElectricCost,
         perWaterCost
     }
-    return sendPost(HOST+SERVICE,body);
+    const url = HOST.local + SERVICE.room;
+    return sendPost(url, body);
 }
