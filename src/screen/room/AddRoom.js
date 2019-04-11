@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import Global from '../../Global';
 import { MainButton } from '../baseComponent'
-import axios from 'axios';
-
+import { roomServices } from "../../services";
 class AddRoom extends Component {
     static navigationOptions = () => {
         return {
@@ -28,8 +27,20 @@ class AddRoom extends Component {
         perElectricCost: '',
         perWaterCost: '',
     };
-    render() {
+
+    onPressAddRoom = () => {
+        const { name, address, roomCost, perElectricCost, perWaterCost } = this.state;
         const { navigation } = this.props;
+        const userId = '5ca46e712c76681518568bc5';
+        const _roomCost = parseInt(roomCost.replace(/\./g, ''), 10);
+        const _perElectricCost = parseInt(perElectricCost.replace(/\./g, ''), 10);
+        const _perWaterCost = parseInt(perWaterCost.replace(/\./g, ''), 10);
+        roomServices.addRoom(userId, name, address, _roomCost, _perElectricCost, _perWaterCost).then(res => {
+            navigation.goBack();
+        });
+    }
+
+    render() {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.row}>
@@ -61,21 +72,7 @@ class AddRoom extends Component {
                         this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
-                <MainButton title='Tạo phòng' onPress={() => {
-                    const userId = '5ca46e712c76681518568bc5'
-                    const url = Global.host + '/room';
-                    axios.post(url, {
-                        userId,
-                        name: this.state.name,
-                        address: this.state.address,
-                        roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
-                        perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
-                        perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
-                    }).then(res => {
-                        console.log(res);
-                        navigation.goBack();
-                    });
-                }} />
+                <MainButton title='Tạo phòng' onPress={this.onPressAddRoom} />
             </ScrollView >
         );
     }
