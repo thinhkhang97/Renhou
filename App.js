@@ -6,24 +6,72 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import CalculateBill from './src/screen/bill/CalculateBill';
+import Bill from './src/screen/bill';
+import Home from './src/screen/home';
+import RoomDetail from './src/screen/room/RoomDetail';
+import Global from './src/Global';
+import UserProfile from "./src/screen/userProfile";
+import RoomInfoDetail from './src/screen/room/RoomDetail/RoomInfoDetail';
+import AddRoom from './src/screen/room/AddRoom';
+import SignIn from "./src/screen/signIn";
+import SignUp from "./src/screen/signUp";
+import ForgetPassword from "./src/screen/forgetPassword";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const AuthenticationStack = createStackNavigator({
+  SignIn,
+  SignUp,
+  ForgetPassword
+},
+{
+  initialRouteName: "SignIn"
+})
 
-type Props = {};
-export default class App extends Component<Props> {
+const AppNavigator = createStackNavigator({
+  Home,
+  RoomDetail,
+  Bill,
+  UserProfile,
+  CalculateBill,
+  RoomInfoDetail,
+  AddRoom,
+
+},
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: Global.COLOR.NAVIGATION,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+      headerBackTitle: null,
+    },
+  });
+
+const AppSwitchNavigator = createStackNavigator({
+  Auth: AuthenticationStack,
+  App: AppNavigator
+},
+{
+  initialRouteName: "Auth",
+  defaultNavigationOptions: {
+    header: null,
+  }
+})
+const AppContainer = createAppContainer(AppSwitchNavigator);
+
+
+class App extends Component {
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <AppContainer />
       </View>
     );
   }
@@ -32,18 +80,8 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
+
+
+export default App;
