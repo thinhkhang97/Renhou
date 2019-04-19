@@ -3,10 +3,10 @@ import {View, TextInput, StyleSheet} from "react-native";
 
 class Input extends React.Component {
     render() {
-        const {placeholder, secure} = this.props;
+        const {onChangeText, value, placeholder, secure} = this.props;
         return (
             <View style={styles.container}>
-                <TextInput secureTextEntry={secure} style={styles.input} placeholder={placeholder}></TextInput>
+                <TextInput onChangeText={onChangeText} value={value} secureTextEntry={secure} style={styles.input} placeholder={placeholder}></TextInput>
             </View>
         )
     }

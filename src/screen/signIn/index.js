@@ -1,41 +1,59 @@
 import * as React from "react";
-import {View, StyleSheet, Text, TextInput, SafeAreaView} from "react-native";
-import {HeaderTitle, Input, MainButton, ProjectTitle, TextButton} from "../../components/baseComponent";
+import { View, StyleSheet, Text, TextInput, SafeAreaView } from "react-native";
+import { HeaderTitle, Input, MainButton, ProjectTitle, TextButton } from "../../components/baseComponent";
 import GLOBAL from "../../Global";
+import { authenServices } from '../../services';
 
 class SignIn extends React.Component {
 
-    static navigationOptions = {header: null}
+    static navigationOptions = { header: null }
+
+    state = {
+        email: 'khoa4001@gmail.com',
+        password: '123456',
+    }
+
+    onEmailChange = (email) => {
+        this.setState({ email: email });
+    }
+
+    onPasswordChange = (password) => {
+        this.setState({ password: password });
+    }
 
     onPressSignUp = () => {
-        const {navigation} = this.props;
+        const { navigation } = this.props;
         navigation.navigate("SignUp");
     }
 
     onPressSignIn = () => {
         /// do something here before navigating
-        const {navigation} = this.props;
-        navigation.navigate("App");
+        const { navigation } = this.props;
+        authenServices.login(this.state.email, this.state.password).then(res => {
+            navigation.navigate("App");
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     onPressForgetPassword = () => {
         /// do something here before navigating
-        const {navigation} = this.props;
+        const { navigation } = this.props;
         navigation.navigate("ForgetPassword");
     }
 
     render() {
-        return(
+        return (
             <SafeAreaView style={styles.container}>
-                <ProjectTitle/>
+                <ProjectTitle />
                 <View style={styles.header}>
-                <HeaderTitle title="Đăng nhập"/>
+                    <HeaderTitle title="Đăng nhập" />
                 </View>
-                <Input placeholder="Địa chỉ email"/>
-                <Input placeholder="Mật khẩu" secure/>
-                <MainButton title="Đăng nhập" onPress={this.onPressSignIn}/>
-                <TextButton title="Quên mật khẩu?" onPress={this.onPressForgetPassword}/>
-                <TextButton title="Đăng ký tài khoản" color={GLOBAL.COLOR.MAINCOLOR} onPress={this.onPressSignUp}/>
+                <Input onChangeText={this.onEmailChange} placeholder="Địa chỉ email" />
+                <Input onChangeText={this.onPasswordChange} placeholder="Mật khẩu" secure />
+                <MainButton title="Đăng nhập" onPress={this.onPressSignIn} />
+                <TextButton title="Quên mật khẩu?" onPress={this.onPressForgetPassword} />
+                <TextButton title="Đăng ký tài khoản" color={GLOBAL.COLOR.MAINCOLOR} onPress={this.onPressSignUp} />
             </SafeAreaView>
         )
     }

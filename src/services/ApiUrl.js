@@ -6,5 +6,6 @@ export const SERVICE = {
     room: "/room",
     allRoom: '/room/all/',
     roomInfo: '/room/',
-    updateRoom: '/room/feecost'
+    updateRoom: '/room/feecost',
+    login: '/user/signin',
 }
