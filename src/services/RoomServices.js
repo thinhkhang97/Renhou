@@ -1,9 +1,9 @@
-import { sendPost, get, put, getWithToken } from "./BaseHttpServices";
+import { sendPost, get, put, getWithToken, postWithToken } from "./BaseHttpServices";
 import { HOST, SERVICE } from "./ApiUrl";
 
-export function addRoom(data) {
+export function addRoom(data, token) {
     const url = HOST.local + SERVICE.room;
-    return sendPost(url, data);
+    return postWithToken(url, data, token);
 }
 
 export function listRoom(userID, token) {

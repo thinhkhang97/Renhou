@@ -15,5 +15,11 @@ export function put(url, body) {
 export function getWithToken(url, token) {
     return axios.get(url, {
         headers: { "Authorization": 'Bearer ' + token }
-    })
+    });
+}
+
+export function postWithToken(url, body, token) {
+    return axios.post(url, body, {
+        headers: { "Authorization": 'Bearer ' + token }
+    });
 }

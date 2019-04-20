@@ -30,20 +30,19 @@ class AddRoom extends Component {
 
     onPressAddRoom = () => {
         const { name, address, roomCost, perElectricCost, perWaterCost } = this.state;
-        const { navigation } = this.props;
-        const userId = '5ca46e712c76681518568bc5';
+        const { navigation, userID, token } = this.props;
         const _roomCost = parseInt(roomCost.replace(/\./g, ''), 10);
         const _perElectricCost = parseInt(perElectricCost.replace(/\./g, ''), 10);
         const _perWaterCost = parseInt(perWaterCost.replace(/\./g, ''), 10);
         const data = {
-            userId,
+            userId: userID,
             name,
             address,
             roomCost: _roomCost,
             perElectricCost: _perElectricCost,
             perWaterCost: _perWaterCost,
         }
-        roomServices.addRoom(data).then(res => {
+        roomServices.addRoom(data, token).then(res => {
             navigation.goBack();
         });
     }
@@ -117,5 +116,16 @@ const styles = StyleSheet.create({
     },
 });
 
+const mapStateToProps = (state) => ({
+    token: state.authenticationReducer.accessToken,
+    userID: state.authenticationReducer.userID,
+})
 
-export default AddRoom;
+const mapDispatchToProps = (dispatch) => ({
+    addRoom: (userID, token, data) => dispatch(addRoom(userID, token, data)),
+    SignOut: () => dispatch(SignOut()),
+})
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddRoom);
