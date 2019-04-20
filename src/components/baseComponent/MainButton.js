@@ -4,9 +4,9 @@ import GLOBAL from "../../Global";
 
 class MainButton extends React.Component {
     render() {
-        const { title } = this.props;
+        const { title, disabled } = this.props;
         return (
-            <TouchableOpacity style={styles.container} onPress={() => this.props.onPress()}>
+            <TouchableOpacity disabled={disabled} style={styles.container} onPress={() => this.props.onPress()}>
                 <Text style={styles.text}>{title}</Text>
             </TouchableOpacity>
         )

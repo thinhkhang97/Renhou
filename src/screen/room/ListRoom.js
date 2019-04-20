@@ -3,38 +3,44 @@ import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity } from '
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { roomServices } from '../../services';
+import { connect } from 'react-redux';
 
-export default class ListRoom extends React.Component {
+class ListRoom extends React.Component {
     state = {
         room: [],
     };
     componentDidMount() {
-        const userID = '5ca46e712c76681518568bc5';
-        roomServices.listRoom(userID).then(res => {
-            const data = res.data;
-            this.setState({room: [...data.data]});
-        })
+        const { userID, accessToken } = this.props;
+        console.log(userID);
+        // const userID = '5ca46e712c76681518568bc5';
+        // roomServices.listRoom(userID).then(res => {
+        //     const data = res.data;
+        //     this.setState({room: [...data.data]});
+        // }).catch(e => {
+
+        // });
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <ScrollView style={{ paddingTop: 20 }}>
-                    <FlatList data={this.state.room}
-                        renderItem={({ item }) => {
-                            return (
-                                <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
-                                    name: item.name,
-                                    roomID: item._id,
-                                })}>
-                                    <View style={styles.item}>
-                                        <Text style={styles.text}>{item.name}</Text>
-                                        <Text style={styles.date}>February 3</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            )
-                        }}
-                        keyExtractor={item => item._id} />
+                    {this.state.room.length > 0 ?
+                        <FlatList data={this.state.room}
+                            renderItem={({ item }) => {
+                                return (
+                                    <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
+                                        name: item.name,
+                                        roomID: item._id,
+                                    })}>
+                                        <View style={styles.item}>
+                                            <Text style={styles.text}>{item.name}</Text>
+                                            <Text style={styles.date}>February 3</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            }}
+                            keyExtractor={item => item._id} /> : <Text>Chưa có phòng</Text>}
                 </ScrollView>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('AddRoom')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
             </View>
@@ -75,3 +81,15 @@ const styles = StyleSheet.create({
         marginRight: 20,
     }
 });
+
+const mapStateToProps = (state) => ({
+    accessToken: state.authenticationReducer.accessToken,
+    userID: state.authenticationReducer.userID,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListRoom);

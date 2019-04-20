@@ -2,14 +2,15 @@ import * as React from "react";
 import { View, StyleSheet, Text, TextInput, SafeAreaView } from "react-native";
 import { HeaderTitle, Input, MainButton, ProjectTitle, TextButton } from "../../components/baseComponent";
 import GLOBAL from "../../Global";
-import { authenServices } from '../../services';
+import { connect } from 'react-redux';
+import { authenticate } from '../../store/actions/authenticationAction';
 
 class SignIn extends React.Component {
 
     static navigationOptions = { header: null }
 
     state = {
-        email: 'khoa4001@gmail.com',
+        email: 'khoa400@gmail.com',
         password: '123456',
     }
 
@@ -27,13 +28,18 @@ class SignIn extends React.Component {
     }
 
     onPressSignIn = () => {
-        /// do something here before navigating
-        const { navigation } = this.props;
-        authenServices.login(this.state.email, this.state.password).then(res => {
-            navigation.navigate("App");
-        }).catch(error => {
-            console.log(error)
+        const { authenticate } = this.props;
+        authenticate({
+            email: this.state.email,
+            password: this.state.password,
         })
+        /// do something here before navigating
+        // const { navigation } = this.props;
+        // authenServices.login(this.state.email, this.state.password).then(res => {
+        //     navigation.navigate("App");
+        // }).catch(error => {
+        //     console.log(error)
+        // })
     }
 
     onPressForgetPassword = () => {
@@ -42,7 +48,12 @@ class SignIn extends React.Component {
         navigation.navigate("ForgetPassword");
     }
 
+    componentWillReceiveProps(props) {
+        const { isAuthenticated, error } = props;
+    }
+
     render() {
+        const { isAuthenticating } = this.props;
         return (
             <SafeAreaView style={styles.container}>
                 <ProjectTitle />
@@ -51,7 +62,7 @@ class SignIn extends React.Component {
                 </View>
                 <Input onChangeText={this.onEmailChange} placeholder="Địa chỉ email" />
                 <Input onChangeText={this.onPasswordChange} placeholder="Mật khẩu" secure />
-                <MainButton title="Đăng nhập" onPress={this.onPressSignIn} />
+                <MainButton disabled={isAuthenticating} title="Đăng nhập" onPress={this.onPressSignIn} />
                 <TextButton title="Quên mật khẩu?" onPress={this.onPressForgetPassword} />
                 <TextButton title="Đăng ký tài khoản" color={GLOBAL.COLOR.MAINCOLOR} onPress={this.onPressSignUp} />
             </SafeAreaView>
@@ -71,4 +82,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SignIn
+const mapStateToProps = (state) => ({
+    isAuthenticating: state.authenticationReducer.isAuthenticating,
+    isAuthenticated: state.authenticationReducer.isAuthenticated,
+    accessToken: state.authenticationReducer.accessToken,
+    error: state.authenticationReducer.error,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    authenticate: (data) => {
+        dispatch(authenticate(data));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
