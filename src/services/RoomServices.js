@@ -1,4 +1,4 @@
-import { sendPost, get, put } from "./BaseHttpServices";
+import { sendPost, get, put, getWithToken } from "./BaseHttpServices";
 import { HOST, SERVICE } from "./ApiUrl";
 
 export function addRoom(data) {
@@ -6,9 +6,9 @@ export function addRoom(data) {
     return sendPost(url, data);
 }
 
-export function listRoom(userID) {
+export function listRoom(userID, token) {
     const url = HOST.local + SERVICE.allRoom + userID;
-    return get(url);
+    return getWithToken(url, token);
 }
 
 export function roomInfo(roomID) {

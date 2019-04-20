@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import ListRoom from '../../screen/room/ListRoom'
 import Global from '../../Global';

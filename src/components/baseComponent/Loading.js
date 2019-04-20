@@ -5,9 +5,8 @@ export default class Loading extends Component {
     render() {
         return (
             <View>
-                <Text style={{ fontSize: 26, color: GLOBAL.COLOR.NAVIGATION }}>Đang tải dữ liệu...</Text>
-                <Image style={{ width: 120, height: 120 }} source={require('../../images/loading.gif')} />
+                <Image style={{ width: 128, height: 128 }} source={require('../../images/loading.gif')} />
             </View>
-        )
+        );
     }
 }

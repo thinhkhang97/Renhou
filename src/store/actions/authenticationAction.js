@@ -22,7 +22,7 @@ export const authenticate = (data) => (dispatch) => {
     })
 }
 
-export const signOut = () => (dispatch) => {
+export const SignOut = () => (dispatch) => {
     dispatch({
         type: SIGN_OUT,
     });

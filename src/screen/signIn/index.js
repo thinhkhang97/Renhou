@@ -11,8 +11,8 @@ class SignIn extends React.Component {
     static navigationOptions = { header: null }
 
     state = {
-        email: '',
-        password: '',
+        email: 'khoa400@gmail.com',
+        password: '123456',
     }
 
     onEmailChange = (email) => {

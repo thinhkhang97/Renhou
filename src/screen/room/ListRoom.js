@@ -1,50 +1,56 @@
 import * as React from 'react';
-import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { roomServices } from '../../services';
+import Loading from '../../components/baseComponent/Loading';
+import { loadRoom } from '../../store/actions/roomAction';
+import { SignOut } from '../../store/actions/authenticationAction';
 import { connect } from 'react-redux';
 
 class ListRoom extends React.Component {
-    state = {
-        room: [],
-    };
     componentDidMount() {
-        const { userID, accessToken } = this.props;
-        console.log(userID);
-        // const userID = '5ca46e712c76681518568bc5';
-        // roomServices.listRoom(userID).then(res => {
-        //     const data = res.data;
-        //     this.setState({room: [...data.data]});
-        // }).catch(e => {
+        const { userID, accessToken, loadRoom } = this.props;
+        loadRoom(userID, accessToken);
+    }
 
-        // });
+    componentWillReceiveProps(props) {
+        const { loadingRoom, room, SignOut } = props;
+        if (!loadingRoom && !room) {
+            Alert.alert('Lỗi', 'Có lỗi xảy ra khi tải dữ liệu');
+            SignOut();
+        }
     }
 
     render() {
+        const { room, navigation } = this.props;
+        if (room)
+            return (
+                <View style={styles.container}>
+                    <ScrollView style={{ paddingTop: 20 }}>
+                        {room.length > 0 ?
+                            <FlatList data={room}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <TouchableOpacity style={styles.room} onPress={() => navigation.navigate('RoomDetail', {
+                                            name: item.name,
+                                            roomID: item._id,
+                                        })}>
+                                            <View style={styles.item}>
+                                                <Text style={styles.text}>{item.name}</Text>
+                                                <Text style={styles.date}>February 3</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    )
+                                }}
+                                keyExtractor={item => item._id} /> : <Text>Chưa có phòng</Text>}
+                    </ScrollView>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddRoom')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
+                </View>
+            );
         return (
-            <View style={styles.container}>
-                <ScrollView style={{ paddingTop: 20 }}>
-                    {this.state.room.length > 0 ?
-                        <FlatList data={this.state.room}
-                            renderItem={({ item }) => {
-                                return (
-                                    <TouchableOpacity style={styles.room} onPress={() => this.props.navigation.navigate('RoomDetail', {
-                                        name: item.name,
-                                        roomID: item._id,
-                                    })}>
-                                        <View style={styles.item}>
-                                            <Text style={styles.text}>{item.name}</Text>
-                                            <Text style={styles.date}>February 3</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                )
-                            }}
-                            keyExtractor={item => item._id} /> : <Text>Chưa có phòng</Text>}
-                </ScrollView>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('AddRoom')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
-            </View>
-        );
+            <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+                <Loading />
+            </View>);
     }
 }
 
@@ -85,10 +91,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
     accessToken: state.authenticationReducer.accessToken,
     userID: state.authenticationReducer.userID,
+    loadingRoom: state.roomReducer.loading,
+    room: state.roomReducer.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    loadRoom: (userID, token) => dispatch(loadRoom(userID, token)),
+    SignOut: () => dispatch(SignOut()),
 })
 
 

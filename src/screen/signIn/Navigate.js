@@ -16,12 +16,12 @@ class Navigate extends Component {
         const { isAuthenticated, navigation } = this.props;
         if (isAuthenticated) {
             setTimeout(() => {
-                navigation.navigate("App");
+                navigation.push("App");
             }, 10);
         }
         else {
             setTimeout(() => {
-                navigation.navigate("SignIn");
+                navigation.push("SignIn");
             }, 10);
         }
     }
