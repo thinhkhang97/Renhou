@@ -1,6 +1,7 @@
 export const LOAD_REQUEST = 'LOAD_REQUEST';
 export const LOAD_SUCCESS = 'LOAD_SUCCESS';
 export const LOAD_FAILURE = 'LOAD_FAILURE';
+export const ADD_ROOM = 'ADD_ROOM';
 import { roomServices } from '../../services';
 
 export const loadRoom = (userID, token) => (dispatch) => {
@@ -19,3 +20,8 @@ export const loadRoom = (userID, token) => (dispatch) => {
         })
     });
 }
+
+export const addRoom = (data) => ({
+    type: ADD_ROOM,
+    data,
+})

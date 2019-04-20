@@ -2,6 +2,7 @@ import {
     LOAD_SUCCESS,
     LOAD_FAILURE,
     LOAD_REQUEST,
+    ADD_ROOM,
 } from '../actions/roomAction';
 
 const initialState = {
@@ -12,6 +13,9 @@ const initialState = {
 
 const roomReducer = (state = initialState, action) => {
     switch (action.type) {
+        case ADD_ROOM: {
+            return { ...state, data: [...state.data, action.data] };
+        }
         case LOAD_SUCCESS:
             {
                 return {

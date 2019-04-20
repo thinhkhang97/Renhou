@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { StyleSheet, ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import Global from '../../Global';
 import { MainButton } from '../../components/baseComponent';
+import { SignOut } from '../../store/actions/authenticationAction';
+import { addRoom } from '../../store/actions/roomAction';
 import { roomServices } from "../../services";
 class AddRoom extends Component {
     static navigationOptions = () => {
@@ -30,7 +32,7 @@ class AddRoom extends Component {
 
     onPressAddRoom = () => {
         const { name, address, roomCost, perElectricCost, perWaterCost } = this.state;
-        const { navigation, userID, token } = this.props;
+        const { navigation, userID, token, SignOut, addRoom } = this.props;
         const _roomCost = parseInt(roomCost.replace(/\./g, ''), 10);
         const _perElectricCost = parseInt(perElectricCost.replace(/\./g, ''), 10);
         const _perWaterCost = parseInt(perWaterCost.replace(/\./g, ''), 10);
@@ -43,7 +45,11 @@ class AddRoom extends Component {
             perWaterCost: _perWaterCost,
         }
         roomServices.addRoom(data, token).then(res => {
+            addRoom(res.data.data.room);
             navigation.goBack();
+        }).catch(error => {
+            Alert.alert('Lỗi', 'Có lỗi xảy ra khi tải dữ liệu ', error.response);
+            SignOut();
         });
     }
 
@@ -122,7 +128,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addRoom: (userID, token, data) => dispatch(addRoom(userID, token, data)),
+    addRoom: (data) => dispatch(addRoom(data)),
     SignOut: () => dispatch(SignOut()),
 })
 
