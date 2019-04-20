@@ -61,21 +61,21 @@ class AddRoom extends Component {
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Giá phòng</Text>
-                    <TextInput style={styles.data} keyboardType={'numeric'} value={this.state.roomCost} onChangeText={text => {
+                    <TextInput style={styles.data} keyboardType={'number-pad'} value={this.state.roomCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ roomCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Đơn giá điện</Text>
-                    <TextInput style={styles.data} keyboardType={'numeric'} value={this.state.perElectricCost} onChangeText={text => {
+                    <TextInput style={styles.data} keyboardType={'number-pad'} value={this.state.perElectricCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ perElectricCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Đơn giá nước</Text>
-                    <TextInput style={styles.data} keyboardType={'numeric'} value={this.state.perWaterCost} onChangeText={text => {
+                    <TextInput style={styles.data} keyboardType={'number-pad'} value={this.state.perWaterCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />

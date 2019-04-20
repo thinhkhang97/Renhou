@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet, Text, TextInput, SafeAreaView } from "react-native";
+import { View, StyleSheet, Alert, SafeAreaView } from "react-native";
 import { HeaderTitle, Input, MainButton, ProjectTitle, TextButton } from "../../components/baseComponent";
 import GLOBAL from "../../Global";
 import { connect } from 'react-redux';
@@ -33,13 +33,6 @@ class SignIn extends React.Component {
             email: this.state.email,
             password: this.state.password,
         })
-        /// do something here before navigating
-        // const { navigation } = this.props;
-        // authenServices.login(this.state.email, this.state.password).then(res => {
-        //     navigation.navigate("App");
-        // }).catch(error => {
-        //     console.log(error)
-        // })
     }
 
     onPressForgetPassword = () => {
@@ -50,6 +43,24 @@ class SignIn extends React.Component {
 
     componentWillReceiveProps(props) {
         const { isAuthenticated, error } = props;
+        if (!isAuthenticated) {
+            switch (error) {
+                case 1:
+                    Alert.alert('Lỗi', 'Email của bạn không tồn tại');
+                    break;
+                case 2:
+                    Alert.alert('Lỗi', 'Tài khoản của bạn chưa được kích hoạt', [{
+                        text: 'Kích hoạt tài khoản'
+                    }, {
+                        text: 'Huỷ'
+                    }]);
+                    break;
+                case 3:
+                    Alert.alert('Lỗi', 'Mật khẩu không chính xác');
+                    break;
+                default: break;
+            }
+        }
     }
 
     render() {

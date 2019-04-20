@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Loading from '../../components/baseComponent/Loading';
 import { connect } from 'react-redux';
-import GLOBAL from "../../Global";
-class Loading extends Component {
+class Navigate extends Component {
     componentWillReceiveProps(props) {
         const { isAuthenticated, navigation } = props;
         if (isAuthenticated) {
@@ -28,8 +28,7 @@ class Loading extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 26, color: GLOBAL.COLOR.NAVIGATION}}>Đang tải dữ liệu...</Text>
-                <Image style={{width: 120, height: 120}} source={require('../../images/loading.gif')} />
+                <Loading />
             </View>
         );
     }
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        margin: 16
     },
 })
 
@@ -48,4 +46,4 @@ const mapStateToProps = (state) => ({
     isAuthenticated: state.authenticationReducer.isAuthenticated,
 })
 
-export default connect(mapStateToProps, undefined)(Loading);
+export default connect(mapStateToProps, undefined)(Navigate);

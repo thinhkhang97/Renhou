@@ -20,10 +20,10 @@ import AddRoom from './src/screen/room/AddRoom';
 import SignIn from "./src/screen/signIn";
 import SignUp from "./src/screen/signUp";
 import ForgetPassword from "./src/screen/forgetPassword";
-import Loading from './src/screen/signIn/Loading';
+import Navigate from './src/screen/signIn/Navigate';
 
 const AuthenticationStack = createStackNavigator({
-  Loading,
+  Navigate,
   SignIn,
   SignUp,
   ForgetPassword
