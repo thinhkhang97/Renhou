@@ -23,3 +23,9 @@ export function postWithToken(url, body, token) {
         headers: { "Authorization": 'Bearer ' + token }
     });
 }
+
+export function putWithToken(url, body, token) {
+    return axios.put(url, body, {
+        headers: { "Authorization": 'Bearer ' + token }
+    });
+}

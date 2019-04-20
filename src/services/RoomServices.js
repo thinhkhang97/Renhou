@@ -1,4 +1,4 @@
-import { sendPost, get, put, getWithToken, postWithToken } from "./BaseHttpServices";
+import { sendPost, get, put, getWithToken, postWithToken, putWithToken } from "./BaseHttpServices";
 import { HOST, SERVICE } from "./ApiUrl";
 
 export function addRoom(data, token) {
@@ -11,12 +11,12 @@ export function listRoom(userID, token) {
     return getWithToken(url, token);
 }
 
-export function roomInfo(roomID) {
+export function roomInfo(roomID, token) {
     const url = HOST.local + SERVICE.roomInfo + roomID;
-    return get(url);
+    return getWithToken(url, token);
 }
 
-export function updateRoom(body) {
+export function updateRoom(body, token) {
     const url = HOST.local + SERVICE.updateRoom;
-    return put(url, body);
+    return putWithToken(url, body, token);
 }

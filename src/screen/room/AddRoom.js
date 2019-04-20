@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, TextInput, Alert, Text } from 'react-native';
 import Global from '../../Global';
 import { MainButton } from '../../components/baseComponent';
-import { SignOut } from '../../store/actions/authenticationAction';
 import { addRoom } from '../../store/actions/roomAction';
 import { roomServices } from "../../services";
 class AddRoom extends Component {
@@ -28,11 +27,13 @@ class AddRoom extends Component {
         roomCost: '',
         perElectricCost: '',
         perWaterCost: '',
+        adding: false,
     };
 
     onPressAddRoom = () => {
         const { name, address, roomCost, perElectricCost, perWaterCost } = this.state;
-        const { navigation, userID, token, SignOut, addRoom } = this.props;
+        this.setState({ adding: true });
+        const { navigation, userID, token, addRoom } = this.props;
         const _roomCost = parseInt(roomCost.replace(/\./g, ''), 10);
         const _perElectricCost = parseInt(perElectricCost.replace(/\./g, ''), 10);
         const _perWaterCost = parseInt(perWaterCost.replace(/\./g, ''), 10);
@@ -48,8 +49,8 @@ class AddRoom extends Component {
             addRoom(res.data.data.room);
             navigation.goBack();
         }).catch(error => {
-            Alert.alert('Lỗi', 'Có lỗi xảy ra khi tải dữ liệu ', error.response);
-            SignOut();
+            Alert.alert('Lỗi', error.response.data.data.message);
+            navigation.goBack();
         });
     }
 
@@ -85,7 +86,7 @@ class AddRoom extends Component {
                         this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
-                <MainButton title='Tạo phòng' onPress={this.onPressAddRoom} />
+                <MainButton title='Tạo phòng' disabled={this.state.adding} onPress={this.onPressAddRoom} />
             </ScrollView >
         );
     }
@@ -129,7 +130,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     addRoom: (data) => dispatch(addRoom(data)),
-    SignOut: () => dispatch(SignOut()),
 })
 
 

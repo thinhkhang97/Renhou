@@ -25,3 +25,7 @@ export const addRoom = (data) => ({
     type: ADD_ROOM,
     data,
 })
+
+export const updateRoom = (data) => ({
+    
+})
