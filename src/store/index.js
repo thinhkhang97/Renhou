@@ -5,4 +5,4 @@ import rootReducer from './reducers';
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 export const persistor = persistStore(store);
-persistor.purge();
+// persistor.purge();
