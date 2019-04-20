@@ -4,13 +4,14 @@ import { HeaderTitle, Input, MainButton, ProjectTitle, TextButton } from "../../
 import GLOBAL from "../../Global";
 import { connect } from 'react-redux';
 import { authenticate } from '../../store/actions/authenticationAction';
+import { authenServices } from '../../services';
 
 class SignIn extends React.Component {
 
     static navigationOptions = { header: null }
 
     state = {
-        email: 'khoa400@gmail.com',
+        email: 'khoa4001@gmail.com',
         password: '123456',
     }
 
@@ -35,6 +36,14 @@ class SignIn extends React.Component {
         })
     }
 
+    onVerifyAgain() {
+        authenServices.reverify(this.state.email).then(res => {
+            Alert.alert('Thông báo', 'Email kích hoạt tài khoản đã được gửi đến email của bạn.');
+        }).catch(error => {
+            Alert.alert(error.response);
+        });
+    }
+
     onPressForgetPassword = () => {
         /// do something here before navigating
         const { navigation } = this.props;
@@ -50,7 +59,8 @@ class SignIn extends React.Component {
                     break;
                 case 2:
                     Alert.alert('Lỗi', 'Tài khoản của bạn chưa được kích hoạt', [{
-                        text: 'Kích hoạt tài khoản'
+                        text: 'Kích hoạt tài khoản',
+                        onPress: () => this.onVerifyAgain(),
                     }, {
                         text: 'Huỷ'
                     }]);

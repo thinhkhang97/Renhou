@@ -8,4 +8,5 @@ export const SERVICE = {
     roomInfo: '/room/',
     updateRoom: '/room/feecost',
     login: '/user/signin',
+    reverify: '/user/reverify',
 }

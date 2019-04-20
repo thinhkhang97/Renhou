@@ -1,4 +1,4 @@
-import { sendPost, get, put } from "./BaseHttpServices";
+import { sendPost } from "./BaseHttpServices";
 import { HOST, SERVICE } from "./ApiUrl";
 
 export function login(email, password) {
@@ -6,5 +6,12 @@ export function login(email, password) {
     return sendPost(url, {
         email,
         password
+    });
+}
+
+export function reverify(email) {
+    const url = HOST.local + SERVICE.reverify;
+    return sendPost(url, {
+        email
     });
 }
