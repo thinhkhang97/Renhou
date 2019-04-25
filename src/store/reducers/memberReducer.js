@@ -14,7 +14,9 @@ const initialState = {
 
 const memberReducer = (state = initialState, action) => {
     switch (action.type) {
-        
+        case ADD_MEMBER: {
+            return { ...state, members: [...state.members, action.data] };
+        }
         default:
             return state;
     }

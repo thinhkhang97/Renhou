@@ -21,6 +21,7 @@ import SignIn from "./src/screen/signIn";
 import SignUp from "./src/screen/signUp";
 import ForgetPassword from "./src/screen/forgetPassword";
 import Navigate from './src/screen/signIn/Navigate';
+import AddMember from './src/screen/member/AddMember';
 
 const AuthenticationStack = createStackNavigator({
   Navigate,
@@ -37,7 +38,7 @@ const AppNavigator = createStackNavigator({
   CalculateBill,
   RoomInfoDetail,
   AddRoom,
-
+  AddMember,
 },
   {
     defaultNavigationOptions: {

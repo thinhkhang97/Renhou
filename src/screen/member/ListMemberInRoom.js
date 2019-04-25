@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 class ListMemberInRoom extends React.Component {
     componentDidMount() {
         const { userID, accessToken, loadRoomMember } = this.props;
+
         // loadRoomMember(userID, accessToken);
     }
 
@@ -23,6 +24,7 @@ class ListMemberInRoom extends React.Component {
 
     render() {
         const { members, navigation } = this.props;
+        const roomID = navigation.getParam('roomID');
         if (members)
             return (
                 <View style={styles.container}>
@@ -42,7 +44,7 @@ class ListMemberInRoom extends React.Component {
                                 }
                                 keyExtractor={item => item._id} /> : <Text>Chưa có người thuê</Text>}
                     </ScrollView>
-                    <TouchableOpacity onPress={() => navigation.navigate('AddMember')} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddMember', { roomID })} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
                 </View>
             );
         return (

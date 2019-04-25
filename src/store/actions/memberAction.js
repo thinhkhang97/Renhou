@@ -20,3 +20,8 @@ export const loadRoomMember = (userID, token) => (dispatch) => {
     //     })
     // });
 }
+
+export const addMember = (data) => ({
+    type: ADD_MEMBER,
+    data,
+})

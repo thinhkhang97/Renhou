@@ -26,21 +26,6 @@ export default class RoomDetail extends React.Component {
         ],
     };
 
-    renderFirstRoute() {
-        return <FlatList
-            data={data}
-            renderItem={({ item }) => {
-                return <InfoCard
-                    title={item.name}
-                    subTitle={item.phoneNumber}
-                    onPress={() => {
-                        this.props.navigation.navigate("UserProfile", { data: item });
-                    }}
-                />
-            }
-            }
-        />
-    }
 
     render() {
         return (
