@@ -2,7 +2,8 @@ import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Loading from '../../components/baseComponent/Loading';
+import { Loading } from '../../components/baseComponent';
+import InfoCard from '../../components/infoCard';
 import { loadRoomMember } from '../../store/actions/memberAction';
 import { SignOut } from '../../store/actions/authenticationAction';
 import { connect } from 'react-redux';
@@ -35,7 +36,7 @@ class ListMemberInRoom extends React.Component {
                                 renderItem={({ item }) => {
                                     return <InfoCard
                                         title={item.name}
-                                        subTitle={item.phoneNumber}
+                                        subTitle={item.phone}
                                         onPress={() => {
                                             this.props.navigation.navigate("UserProfile", { data: item });
                                         }}

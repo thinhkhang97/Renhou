@@ -21,27 +21,30 @@ class AddMember extends Component {
     };
     state = {
         name: '',
-        identifier: '',
+        idCard: '',
         phone: '',
         adding: false,
     };
 
     onPressAddRoom = () => {
-        const { name, identifier, phone } = this.state;
+        const { name, idCard, phone } = this.state;
         this.setState({ adding: true });
-        const { navigation, userID, token, addRoom } = this.props;
+        const { navigation, userID, token, addMember } = this.props;
         const roomID = navigation.getParam('roomID');
         const data = {
             userId: userID,
             name,
+            idCard,
+            phone,
+            delFlag: 0,
         }
-        // roomServices.addRoom(data, token).then(res => {
-        //     addRoom(res.data.data.room);
-        //     navigation.goBack();
-        // }).catch(error => {
-        //     Alert.alert('Lỗi', error.response.data.data.message);
-        //     navigation.goBack();
-        // });
+        memberServices.addMember(roomID, data, token).then(res => {
+            addMember(data);
+            navigation.goBack();
+        }).catch(error => {
+            Alert.alert('Lỗi', error.response.data.data.message);
+            navigation.goBack();
+        });
     }
 
     render() {
@@ -54,7 +57,7 @@ class AddMember extends Component {
                     <Input value={this.state.phone} keyboardType={'phone-pad'} placeholder={'Số điện thoại'} onChangeText={text => this.setState({ phone: text })} />
                 </View>
                 <View style={styles.row}>
-                    <Input value={this.state.identifier} keyboardType={'number-pad'} placeholder={'CMND'} onChangeText={text => this.setState({ identifier: text })} />
+                    <Input value={this.state.idCard} keyboardType={'number-pad'} placeholder={'CMND'} onChangeText={text => this.setState({ idCard: text })} />
                 </View>
                 <MainButton title='Thêm' disabled={this.state.adding} onPress={this.onPressAddRoom} />
             </ScrollView >
@@ -99,7 +102,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    addRoom: (data) => dispatch(addRoom(data)),
+    addMember: (data) => dispatch(addMember(data)),
 })
 
 

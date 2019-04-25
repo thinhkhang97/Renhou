@@ -4,7 +4,6 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import AllBill from './AllBill';
 import PopupMenu from './PopupMenu';
 import Global from '../../../Global';
-import InfoCard from '../../../components/infoCard';
 import ListMemberInRoom from '../../member/ListMemberInRoom';
 
 export default class RoomDetail extends React.Component {
