@@ -8,7 +8,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation';
 import CalculateBill from './src/screen/bill/CalculateBill';
 import Bill from './src/screen/bill';
 import Home from './src/screen/home';
@@ -22,6 +22,8 @@ import SignUp from "./src/screen/signUp";
 import ForgetPassword from "./src/screen/forgetPassword";
 import Navigate from './src/screen/signIn/Navigate';
 import AddMember from './src/screen/member/AddMember';
+import Setting from './src/screen/setting';
+import Statistication from './src/screen/statistication';
 
 const AuthenticationStack = createStackNavigator({
   Navigate,
@@ -30,11 +32,18 @@ const AuthenticationStack = createStackNavigator({
   ForgetPassword
 })
 
-const AppNavigator = createStackNavigator({
+const appBottomTabBar = createBottomTabNavigator({
   Home,
+  Statistication,
+  UserProfile,
+  Setting
+}
+)
+
+const AppNavigator = createStackNavigator({
+  Home: appBottomTabBar,
   RoomDetail,
   Bill,
-  UserProfile,
   CalculateBill,
   RoomInfoDetail,
   AddRoom,
