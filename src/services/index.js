@@ -1,4 +1,4 @@
 import * as roomServices from "./RoomServices";
 import * as authenServices from './AuthenServices';
-
-export { roomServices, authenServices};
+import * as memberServices from './MemberServices';
+export { roomServices, authenServices, memberServices };

@@ -7,6 +7,7 @@ export const SERVICE = {
     allRoom: '/room/all/',
     roomInfo: '/room/',
     updateRoom: '/room/config',
+    addMember: '/member/create',
     login: '/user/signin',
     reverify: '/user/reverify',
 }
