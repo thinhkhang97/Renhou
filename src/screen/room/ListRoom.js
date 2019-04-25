@@ -32,7 +32,6 @@ class ListRoom extends React.Component {
                                 renderItem={({ item }) => {
                                     return (
                                         <TouchableOpacity style={styles.room} onPress={() => navigation.navigate('RoomDetail', {
-                                            name: item.name,
                                             roomID: item._id,
                                         })}>
                                             <View style={styles.item}>

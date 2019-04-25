@@ -3,6 +3,7 @@ import {
     LOAD_FAILURE,
     LOAD_REQUEST,
     ADD_ROOM,
+    UPDATE_ROOM,
 } from '../actions/roomAction';
 
 const initialState = {
@@ -15,6 +16,16 @@ const roomReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_ROOM: {
             return { ...state, data: [...state.data, action.data] };
+        }
+        case UPDATE_ROOM: {
+            const newData = state.data.map(room => {
+                if (room._id === action.data.roomId) {
+                    room.address = action.data.address;
+                    room.name = action.data.name;
+                }
+                return room;
+            });
+            return { ...state, data: [...newData] };
         }
         case LOAD_SUCCESS:
             {

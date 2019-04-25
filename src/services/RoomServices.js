@@ -11,8 +11,8 @@ export function listRoom(userID, token) {
     return getWithToken(url, token);
 }
 
-export function roomInfo(roomID, token) {
-    const url = HOST.local + SERVICE.roomInfo + roomID;
+export function roomInfo(roomID, token, userID) {
+    const url = HOST.local + SERVICE.roomInfo + roomID + '?userId=' + userID;
     return getWithToken(url, token);
 }
 

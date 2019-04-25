@@ -26,7 +26,7 @@ const data = [
 export default class RoomDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: navigation.getParam('name', 'Empty name'),
+            title: 'Danh sách người thuê',
             headerTintColor: 'white',
             headerRight: (
                 <PopupMenu navigation={navigation} />

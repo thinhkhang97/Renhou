@@ -36,9 +36,9 @@ class RoomInfoDetail extends Component {
         }
     }
     componentDidMount() {
-        const { navigation, token } = this.props;
+        const { navigation, token, userID } = this.props;
         const roomID = navigation.getParam('roomID');
-        roomServices.roomInfo(roomID, token).then(res => {
+        roomServices.roomInfo(roomID, token, userID).then(res => {
             const resData = res.data;
             this.setState({
                 name: resData.data.room.name,
@@ -68,26 +68,29 @@ class RoomInfoDetail extends Component {
         });
     }
     handleEdit(roomId) {
-        const { token } = this.props;
-        roomServices.updateRoom({
+        const { token, userID, updateRoom } = this.props;
+        const data = {
+            userId: userID,
             roomId,
+            name: this.state.name,
             address: this.state.address,
             roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
             perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
             perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
-        }, token).then().catch(error => console.log(error.response));
+        }
+        roomServices.updateRoom(data, token).then(
+            updateRoom(data)
+        ).catch(error => console.log(error.response));
     }
     styleMoney(money) {
         return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
     render() {
-        const { navigation } = this.props;
-        const name = navigation.getParam('name');
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.row}>
                     <Text style={styles.text}>Tên phòng</Text>
-                    <Text style={styles.data}>{name}</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} value={this.state.name} onChangeText={text => this.setState({ name: text })} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Địa chỉ</Text>
@@ -158,6 +161,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
     token: state.authenticationReducer.accessToken,
+    userID: state.authenticationReducer.userID,
 })
 
 const mapDispatchToProps = (dispatch) => ({
