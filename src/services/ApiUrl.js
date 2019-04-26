@@ -10,4 +10,5 @@ export const SERVICE = {
     addMember: '/member/create',
     login: '/user/signin',
     reverify: '/user/reverify',
+    signUp: '/user/signup'
 }
