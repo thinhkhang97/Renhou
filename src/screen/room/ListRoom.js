@@ -3,6 +3,7 @@ import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, Alert }
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from '../../components/baseComponent/Loading';
+import RoomItem from '../../components/baseComponent/RoomItem';
 import { loadRoom } from '../../store/actions/roomAction';
 import { SignOut } from '../../store/actions/authenticationAction';
 import { connect } from 'react-redux';
@@ -21,8 +22,17 @@ class ListRoom extends React.Component {
         }
     }
 
+    renderRoomItem(item) {
+        return (
+            <RoomItem item={item} onPress={() => navigation.navigate('RoomDetail', {
+                roomID: item._id,
+            })}/>
+        )
+    }
+
     render() {
         const { room, navigation } = this.props;
+        console.log("Room", room);
         if (room)
             return (
                 <View style={styles.container}>
@@ -30,16 +40,7 @@ class ListRoom extends React.Component {
                         {room.length > 0 ?
                             <FlatList data={room}
                                 renderItem={({ item }) => {
-                                    return (
-                                        <TouchableOpacity style={styles.room} onPress={() => navigation.navigate('RoomDetail', {
-                                            roomID: item._id,
-                                        })}>
-                                            <View style={styles.item}>
-                                                <Text style={styles.text}>{item.name}</Text>
-                                                <Text style={styles.date}>February 3</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    )
+                                    return this.renderRoomItem(item);
                                 }}
                                 keyExtractor={item => item._id} /> : <Text>Chưa có phòng</Text>}
                     </ScrollView>
@@ -55,29 +56,8 @@ class ListRoom extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Global.COLOR.BACKGROUND,
+        backgroundColor: "white",
         flex: 1,
-    },
-    room: {
-        marginBottom: 15,
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        borderWidth: 2,
-        marginHorizontal: 20,
-        borderRadius: 4,
-        borderColor: '#d6d7da',
-    },
-    item: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    text: {
-        flex: 4,
-    },
-    date: {
-        flex: 2,
-        textAlign: 'right'
     },
     footer: {
         flexDirection: 'column',
