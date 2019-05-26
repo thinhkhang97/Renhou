@@ -16,4 +16,10 @@ export default {
       paddingVertical: 10,
     },
   },
+  DEFAULT_STRING: {
+    allRoom: "Tất cả phòng",
+    statistation: "Thống kê",
+    userProfile: "Hồ sơ",
+    settings: "Cài đặt"
+  }
 };

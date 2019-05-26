@@ -81,7 +81,7 @@ class SignIn extends React.Component {
                 <View style={styles.header}>
                     <HeaderTitle title="Đăng nhập" />
                 </View>
-                <Input onChangeText={this.onEmailChange} placeholder="Địa chỉ email" />
+                <Input onChangeText={this.onEmailChange} placeholder="Địa chỉ email" autoCapitalize="none" />
                 <Input onChangeText={this.onPasswordChange} placeholder="Mật khẩu" secure />
                 <MainButton disabled={isAuthenticating} title="Đăng nhập" onPress={this.onPressSignIn} />
                 <TextButton title="Quên mật khẩu?" onPress={this.onPressForgetPassword} />

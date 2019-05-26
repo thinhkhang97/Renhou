@@ -15,3 +15,8 @@ export function reverify(email) {
         email
     });
 }
+
+export function signUp(email, password) {
+    const url = HOST.local + SERVICE.signUp;
+    return sendPost(url, { email, password })
+}

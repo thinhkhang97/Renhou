@@ -9,7 +9,7 @@ const SecondRoute = () => (
 );
 export default class Home extends React.Component {
     static navigationOptions = {
-        title: 'Tất cả phòng',
+        title: 'Tất cả phòng'
     };
     state = {
         index: 0,
