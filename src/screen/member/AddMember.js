@@ -54,10 +54,8 @@ class AddMember extends Component {
       email,
       delFlag: 0
     }
-    console.log("Data to save", dataToSave, roomID, token);
     roomServices.addMember(dataToSave,token,roomID).then(res => {
       // addRoom(res.data.data.room);
-      console.log("response", res.data.data);
       navigation.pop();
     })
     .catch(error => {

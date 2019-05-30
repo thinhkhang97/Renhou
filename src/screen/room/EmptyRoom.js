@@ -32,7 +32,6 @@ class EmptyRoom extends React.Component {
 
   renderRoomItem(item) {
     const { navigation } = this.props;
-    console.log("item",item);
     return (
       <RoomItem
         item={item}
@@ -48,7 +47,6 @@ class EmptyRoom extends React.Component {
   render() {
     const { room, navigation } = this.props;
     const emptyRoom = room ? room.filter(r=>r.status==='empty'):[];
-    console.log("room", emptyRoom);
 
     if (emptyRoom.length>0)
       return (

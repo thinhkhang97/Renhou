@@ -26,7 +26,6 @@ export default class RoomDetail extends React.Component {
         ],
     };
 
-
     render() {
         return (
             <TabView

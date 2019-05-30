@@ -6,12 +6,21 @@ import Loading from '../../components/baseComponent/Loading';
 import { loadRoomMember } from '../../store/actions/memberAction';
 import { SignOut } from '../../store/actions/authenticationAction';
 import { connect } from 'react-redux';
+import { roomServices } from '../../services';
+import InfoCard from '../../components/infoCard';
 
 class ListMemberInRoom extends React.Component {
+    state = {
+        members: []
+    }
     componentDidMount() {
-        const { userID, accessToken, loadRoomMember } = this.props;
-
-        // loadRoomMember(userID, accessToken);
+        const { userID, accessToken, loadRoomMember, navigation } = this.props;
+        const roomID = navigation.getParam('roomID');
+        roomServices.getAllMembersInRoom(userID,accessToken,roomID).then(res=>{
+            this.setState({
+                members: res.data.member
+            })
+        })
     }
 
     componentWillReceiveProps(props) {
@@ -23,8 +32,8 @@ class ListMemberInRoom extends React.Component {
     }
 
     render() {
-        const { members, navigation } = this.props;
-        const roomID = navigation.getParam('roomID');
+        const { members } = this.state;
+        const roomID = this.props.navigation.getParam('roomID');
         if (members)
             return (
                 <View style={styles.container}>
