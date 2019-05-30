@@ -13,7 +13,7 @@ import { Input } from "../../components/baseComponent";
 import Global from "../../Global";
 import { MainButton } from "../../components/baseComponent";
 import { addMember } from "../../store/actions/memberAction";
-import { memberServices } from "../../services";
+import { memberServices, roomServices } from "../../services";
 class AddMember extends Component {
   static navigationOptions = () => {
     return {
@@ -36,28 +36,33 @@ class AddMember extends Component {
     adding: false
   };
 
-  onPressAddRoom = () => {
-    const { name, identifier, phone } = this.state;
-    this.setState({ adding: true });
-    const { navigation, userID, token, addRoom } = this.props;
-    const roomID = navigation.getParam("roomID");
-    const data = {
-      userId: userID,
-      name
-    };
-    // roomServices.addRoom(data, token).then(res => {
-    //     addRoom(res.data.data.room);
-    //     navigation.goBack();
-    // }).catch(error => {
-    //     Alert.alert('Lỗi', error.response.data.data.message);
-    //     navigation.goBack();
-    // });
-  };
-
   styleDOB(dob) {
     return dob
       .toString()
       .replace(/\B([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g, "-");
+  }
+
+  onPressAddMember = () => {
+    const {userID, token, navigation} = this.props;
+    const {name,identifier,phone,dob,email,adding} = this.state;
+    const roomID = navigation.getParam('roomID');
+    const dataToSave = {
+      userId: userID,
+      name,
+      idCard: identifier,
+      phone,
+      email,
+      delFlag: 0
+    }
+    console.log("Data to save", dataToSave, roomID, token);
+    roomServices.addMember(dataToSave,token,roomID).then(res => {
+      // addRoom(res.data.data.room);
+      console.log("response", res.data.data);
+      navigation.pop();
+    })
+    .catch(error => {
+      Alert.alert("Lỗi", error.response.data.data.message);
+    });
   }
 
   render() {
@@ -89,19 +94,7 @@ class AddMember extends Component {
           </View>
           <View style={styles.row}>
             <Input
-              value={this.state.identifier}
-              keyboardType={"number-pad"}
-              placeholder={"Ngày tháng năm sinh"}
-              onChangeText={text => {
-                this.setState({
-                  dob: text
-                });
-              }}
-            />
-          </View>
-          <View style={styles.row}>
-            <Input
-              value={this.state.identifier}
+              value={this.state.email}
               keyboardType={"email-address"}
               placeholder={"Email"}
               onChangeText={text => this.setState({ email: text })}
@@ -110,7 +103,7 @@ class AddMember extends Component {
           <MainButton
             title="Thêm"
             disabled={this.state.adding}
-            onPress={this.onPressAddRoom}
+            onPress={this.onPressAddMember}
           />
         </ScrollView>
       </KeyboardAvoidingView>
@@ -155,7 +148,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addRoom: data => dispatch(addRoom(data))
+  addMember: data => dispatch(addRoom(data))
 });
 
 export default connect(

@@ -20,3 +20,8 @@ export function updateRoom(body, token) {
     const url = HOST.local + SERVICE.updateRoom;
     return putWithToken(url, body, token);
 }
+
+export function addMember(data, token, params = '') {
+    const url = HOST.local + SERVICE.addMember+`/${params}`;
+    return postWithToken(url, data, token)
+}

@@ -24,7 +24,7 @@ class Statistication extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Thống kê</Text>
+                <Text>Comming soon</Text>
             </SafeAreaView>
         )
     }
