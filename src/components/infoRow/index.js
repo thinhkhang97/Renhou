@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 
 class InfoRow extends React.Component {
     render() {
-        const {title, value} = this.props;
+        const {title, value, editable, stable} = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
-                <TextInput style={styles.value}>{value}</TextInput>
+                <TextInput editable={editable} style={[styles.value, stable && {color: '#a1a1a1'}]}>{value}</TextInput>
             </View>
         )
     }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     value: {
-        color: "#a1a1a1",
+        color: "black",
         fontSize: 17
     }
 })

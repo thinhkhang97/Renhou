@@ -37,7 +37,8 @@ class ListRoom extends React.Component {
         item={item}
         onPress={() =>
           navigation.navigate("RoomDetail", {
-            roomID: item._id
+            roomID: item._id,
+            roomData: item
           })
         }
       />

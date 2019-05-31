@@ -43,9 +43,9 @@ class AddMember extends Component {
   }
 
   onPressAddMember = () => {
-    const {userID, token, navigation} = this.props;
-    const {name,identifier,phone,dob,email,adding} = this.state;
-    const roomID = navigation.getParam('roomID');
+    const { userID, token, navigation } = this.props;
+    const { name, identifier, phone, dob, email, adding } = this.state;
+    const roomID = navigation.getParam("roomID");
     const dataToSave = {
       userId: userID,
       name,
@@ -53,20 +53,22 @@ class AddMember extends Component {
       phone,
       email,
       delFlag: 0
-    }
-    roomServices.addMember(dataToSave,token,roomID).then(res => {
-      // addRoom(res.data.data.room);
-      navigation.pop();
-    })
-    .catch(error => {
-      Alert.alert("Lỗi", error.response.data.data.message);
-    });
-  }
+    };
+    roomServices
+      .addMember(dataToSave, token, roomID)
+      .then(res => {
+        // addRoom(res.data.data.room);
+        navigation.pop();
+      })
+      .catch(error => {
+        Alert.alert("Lỗi", error.response.data.data.message);
+      });
+  };
 
   render() {
     return (
-      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-        <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} keyboardDismissMode="on-drag">
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
           <View style={styles.row}>
             <Input
               value={this.state.name}
@@ -103,8 +105,8 @@ class AddMember extends Component {
             disabled={this.state.adding}
             onPress={this.onPressAddMember}
           />
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
