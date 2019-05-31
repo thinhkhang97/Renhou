@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import ListRoom from '../../screen/room/ListRoom'
+import ListRoom from '../../screen/room/ListRoom';
+import EmptyRoom from '../../screen/room/EmptyRoom';
 import Global from '../../Global';
 
 const SecondRoute = () => (
@@ -9,7 +10,7 @@ const SecondRoute = () => (
 );
 export default class Home extends React.Component {
     static navigationOptions = {
-        title: 'Tất cả phòng',
+        title: 'Tất cả phòng'
     };
     state = {
         index: 0,
@@ -25,7 +26,7 @@ export default class Home extends React.Component {
                 navigationState={this.state}
                 renderScene={SceneMap({
                     first: () => <ListRoom navigation={this.props.navigation} />,
-                    second: SecondRoute,
+                    second: () => <EmptyRoom navigation={this.props.navigation}/>,
                     third: SecondRoute,
                 })}
                 onIndexChange={index => this.setState({ index })}

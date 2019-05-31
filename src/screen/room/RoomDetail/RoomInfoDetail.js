@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Global from '../../../Global';
 import { roomServices } from '../../../services';
+import { updateRoom } from '../../../store/actions/roomAction';
+import { connect } from 'react-redux';
 
 class RoomInfoDetail extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -34,9 +36,9 @@ class RoomInfoDetail extends Component {
         }
     }
     componentDidMount() {
-        const { navigation } = this.props;
+        const { navigation, token, userID } = this.props;
         const roomID = navigation.getParam('roomID');
-        roomServices.roomInfo(roomID).then(res => {
+        roomServices.roomInfo(roomID, token, userID).then(res => {
             const resData = res.data;
             this.setState({
                 name: resData.data.room.name,
@@ -46,6 +48,8 @@ class RoomInfoDetail extends Component {
                 perWaterCost: this.styleMoney(resData.data.rule.perWaterCost),
             })
         }).catch(error => console.log(error));
+
+        //set params
         navigation.setParams({
             editable: 'Sửa',
             handleEdit: () => {
@@ -64,25 +68,29 @@ class RoomInfoDetail extends Component {
         });
     }
     handleEdit(roomId) {
-        roomServices.updateRoom({
+        const { token, userID, updateRoom } = this.props;
+        const data = {
+            userId: userID,
             roomId,
+            name: this.state.name,
             address: this.state.address,
             roomCost: parseInt(this.state.roomCost.replace(/\./g, ''), 10),
             perElectricCost: parseInt(this.state.perElectricCost.replace(/\./g, ''), 10),
             perWaterCost: parseInt(this.state.perWaterCost.replace(/\./g, ''), 10),
-        }).then().catch(error => console.log(error));
+        }
+        roomServices.updateRoom(data, token).then(
+            updateRoom(data)
+        ).catch(error => console.log(error.response));
     }
     styleMoney(money) {
         return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
     render() {
-        const { navigation } = this.props;
-        const name = navigation.getParam('name');
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.row}>
                     <Text style={styles.text}>Tên phòng</Text>
-                    <Text style={styles.data}>{name}</Text>
+                    <TextInput style={styles.data} editable={this.state.editable} value={this.state.name} onChangeText={text => this.setState({ name: text })} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Địa chỉ</Text>
@@ -90,21 +98,21 @@ class RoomInfoDetail extends Component {
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Giá phòng</Text>
-                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.roomCost} onChangeText={text => {
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'number-pad'} value={this.state.roomCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ roomCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Đơn giá điện</Text>
-                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.perElectricCost} onChangeText={text => {
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'number-pad'} value={this.state.perElectricCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ perElectricCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.text}>Đơn giá nước</Text>
-                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'numeric'} value={this.state.perWaterCost} onChangeText={text => {
+                    <TextInput style={styles.data} editable={this.state.editable} keyboardType={'number-pad'} value={this.state.perWaterCost} onChangeText={text => {
                         const intMoney = parseInt(text.replace(/\./g, ''), 10);
                         this.setState({ perWaterCost: text === '' ? '' : this.styleMoney(intMoney) })
                     }} />
@@ -151,4 +159,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RoomInfoDetail;
+const mapStateToProps = (state) => ({
+    token: state.authenticationReducer.accessToken,
+    userID: state.authenticationReducer.userID,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    updateRoom: (data) => dispatch(updateRoom(data)),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomInfoDetail);

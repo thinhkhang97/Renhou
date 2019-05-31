@@ -1,9 +1,11 @@
 import * as React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
+import {connect} from "react-redux";
 import Avatar from "../../components/avatar";
 import InfoRow from "../../components/infoRow";
+import {MainButton} from "../../components/baseComponent";
 import GLOBAL from "../../Global";
-import { ScrollView } from "react-native-gesture-handler";
+import {SignOut} from "../../store/actions/authenticationAction";
 
 const url = "https://as01.epimg.net/us/imagenes/2018/06/06/futbol/1528244019_930352_1528244120_noticia_normal.jpg"
 
@@ -23,6 +25,12 @@ class UserProfile extends React.Component {
             },
         };
     };
+
+    onPress = () => {
+        const {signOut} = this.props;
+        signOut();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -37,6 +45,7 @@ class UserProfile extends React.Component {
                         <InfoRow title="Địa chỉ" value="Nguyễn Cư Trinh" />
                         <InfoRow title="Email" value="thinhkhang97@gmail.com" />
                     </View>
+                    <MainButton title="Đăng xuất" onPress={this.onPress} style={styles.signOut}/>
                 </ScrollView>
             </View>
         )
@@ -51,12 +60,24 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: "#FFFFFF"
     },
     avatarContainer: {
         marginTop: 30,
         alignItems: "center",
         marginBottom: 20
+    },
+    signOut: {
+        flex: 1,
+        width: 'auto',
+        marginHorizontal: 32
     }
 })
 
-export default UserProfile;
+const mapDispatchToProps = (dispatch)=>({
+    signOut: ()=>{
+        dispatch(SignOut());
+    }
+})
+
+export default connect(null, mapDispatchToProps)(UserProfile);

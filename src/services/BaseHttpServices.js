@@ -8,6 +8,24 @@ export function get(url) {
     return axios.get(url);
 }
 
-export function put(url, body){
+export function put(url, body) {
     return axios.put(url, body);
+}
+
+export function getWithToken(url, token) {
+    return axios.get(url, {
+        headers: { "Authorization": 'Bearer ' + token }
+    });
+}
+
+export function postWithToken(url, body, token) {
+    return axios.post(url, body, {
+        headers: { "Authorization": 'Bearer ' + token }
+    });
+}
+
+export function putWithToken(url, body, token) {
+    return axios.put(url, body, {
+        headers: { "Authorization": 'Bearer ' + token }
+    });
 }
