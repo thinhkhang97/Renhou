@@ -24,6 +24,7 @@ import Navigate from './src/screen/signIn/Navigate';
 import AddMember from './src/screen/member/AddMember';
 import Setting from './src/screen/setting';
 import Statistication from './src/screen/statistication';
+import MemberProfile from './src/screen/userProfile/memberProfile';
 import { BriefcaseIcons, StatIcon, AccountIcon, SettingIcon } from './src/icons/Icons';
 
 const AuthenticationStack = createStackNavigator({
@@ -86,6 +87,7 @@ const AppNavigator = createStackNavigator({
   RoomInfoDetail,
   AddRoom,
   AddMember,
+  MemberProfile
 },
   {
     defaultNavigationOptions: {

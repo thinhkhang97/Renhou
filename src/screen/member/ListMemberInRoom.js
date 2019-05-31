@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import Global from '../../Global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from '../../components/baseComponent/Loading';
@@ -13,7 +14,8 @@ class ListMemberInRoom extends React.Component {
     state = {
         members: []
     }
-    componentDidMount() {
+
+    onFocusThisScreen = () => {
         const { userID, accessToken, loadRoomMember, navigation } = this.props;
         const roomID = navigation.getParam('roomID');
         roomServices.getAllMembersInRoom(userID,accessToken,roomID).then(res=>{
@@ -23,20 +25,15 @@ class ListMemberInRoom extends React.Component {
         })
     }
 
-    componentWillReceiveProps(props) {
-        // const { loadingMembers, members, SignOut } = props;
-        // if (!loadingMembers && !members) {
-        //     Alert.alert('Lỗi', 'Có lỗi xảy ra khi tải dữ liệu');
-        //     SignOut();
-        // }
-    }
-
     render() {
         const { members } = this.state;
         const roomID = this.props.navigation.getParam('roomID');
+        const roomData = this.props.navigation.getParam('roomData');
+        console.log("members", members);
         if (members)
             return (
                 <View style={styles.container}>
+                    <NavigationEvents onWillFocus={this.onFocusThisScreen}/>
                     <ScrollView style={{ paddingTop: 20 }}>
                         {members.length > 0 ?
                             <FlatList
@@ -44,16 +41,17 @@ class ListMemberInRoom extends React.Component {
                                 renderItem={({ item }) => {
                                     return <InfoCard
                                         title={item.name}
-                                        subTitle={item.phoneNumber}
+                                        subLabel='Liên hệ'
+                                        subTitle={item.phone}
                                         onPress={() => {
-                                            this.props.navigation.navigate("UserProfile", { data: item });
+                                            this.props.navigation.navigate("MemberProfile", { data: item, roomData });
                                         }}
                                     />
                                 }
                                 }
                                 keyExtractor={item => item._id} /> : <Text>Chưa có người thuê</Text>}
                     </ScrollView>
-                    <TouchableOpacity onPress={() => navigation.navigate('AddMember', { roomID })} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AddMember', { roomID })} style={styles.footer}><Icon name='ios-add-circle' size={50} color='red' /></TouchableOpacity>
                 </View>
             );
         return (

@@ -10,7 +10,7 @@ class InfoCard extends React.Component {
     avatar: url
   };
   render() {
-    const { title, subTitle, avatar } = this.props;
+    const { title, subTitle, avatar, subLabel } = this.props;
     return (
       <TouchableOpacity
         style={styles.container}
@@ -21,7 +21,7 @@ class InfoCard extends React.Component {
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.textTitle}>{title}</Text>
-          <Text style={styles.subTitle}>{subTitle}</Text>
+          <Text style={styles.subTitle}>{`${subLabel}: ${subTitle}`}</Text>
         </View>
 
         <View style={styles.statusContainer} />
