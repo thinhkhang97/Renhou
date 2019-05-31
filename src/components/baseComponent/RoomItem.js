@@ -4,10 +4,10 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 class RoomItem extends React.Component {
   render() {
     const { item, onPress } = this.props;
+    const roomName = `${item.name}`
     return (
       <TouchableOpacity style={styles.item} onPress={item => onPress(item)}>
-        <Text style={styles.text}>{item.name}</Text>
-        <Text style={styles.date}>February 3</Text>
+        <Text style={styles.text}>{roomName}</Text>
       </TouchableOpacity>
     );
   }

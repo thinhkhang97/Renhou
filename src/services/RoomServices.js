@@ -20,3 +20,13 @@ export function updateRoom(body, token) {
     const url = HOST.local + SERVICE.updateRoom;
     return putWithToken(url, body, token);
 }
+
+export function addMember(data, token, params = '') {
+    const url = HOST.local + SERVICE.addMember+`/${params}`;
+    return postWithToken(url, data, token)
+}
+
+export function getAllMembersInRoom(userID, token, roomID) {
+    const url = HOST.local + SERVICE.getAllMems + roomID + '?userId=' + userID;
+    return getWithToken(url, token);
+}

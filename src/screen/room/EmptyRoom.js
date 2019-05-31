@@ -16,7 +16,7 @@ import { loadRoom } from "../../store/actions/roomAction";
 import { SignOut } from "../../store/actions/authenticationAction";
 import { connect } from "react-redux";
 
-class ListRoom extends React.Component {
+class EmptyRoom extends React.Component {
   componentDidMount() {
     const { userID, accessToken, loadRoom } = this.props;
     loadRoom(userID, accessToken);
@@ -37,8 +37,7 @@ class ListRoom extends React.Component {
         item={item}
         onPress={() =>
           navigation.navigate("RoomDetail", {
-            roomID: item._id,
-            roomData: item
+            roomID: item._id
           })
         }
       />
@@ -47,29 +46,24 @@ class ListRoom extends React.Component {
 
   render() {
     const { room, navigation } = this.props;
-    const hiredRoom = room ? room.filter(r=>r.status!=='empty') : [];
-    if (hiredRoom)
+    const emptyRoom = room ? room.filter(r=>r.status==='empty'):[];
+
+    if (emptyRoom.length>0)
       return (
         <View style={styles.container}>
           <ScrollView style={{ paddingTop: 20 }}>
-            {hiredRoom.length > 0 ? (
+            {emptyRoom.length > 0 ? (
               <FlatList
-                data={hiredRoom}
+                data={emptyRoom}
                 renderItem={({ item }) => {
                   return this.renderRoomItem(item);
                 }}
                 keyExtractor={item => item._id}
               />
             ) : (
-              <Text>Chưa có phòng</Text>
+              <Text>Chưa có phòng trống</Text>
             )}
           </ScrollView>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AddRoom")}
-            style={styles.footer}
-          >
-            <Icon name="ios-add-circle" size={50} color={Global.COLOR.MAINCOLOR} />
-          </TouchableOpacity>
         </View>
       );
     return (
@@ -113,4 +107,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListRoom);
+)(EmptyRoom);

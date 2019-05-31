@@ -24,7 +24,7 @@ class Setting extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Cài đặt</Text>
+                <Text>Comming soon</Text>
             </SafeAreaView>
         )
     }

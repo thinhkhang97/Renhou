@@ -1,5 +1,6 @@
 import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
+import {NavigationEvents} from 'react-navigation';
 import {connect} from "react-redux";
 import Avatar from "../../components/avatar";
 import InfoRow from "../../components/infoRow";
@@ -26,6 +27,8 @@ class UserProfile extends React.Component {
         };
     };
 
+    
+
     onPress = () => {
         const {signOut} = this.props;
         signOut();
@@ -35,7 +38,7 @@ class UserProfile extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <View style={styles.avatarContainer}>
+                    {/* <View style={styles.avatarContainer}>
                         <Avatar size={120} source={{ uri: url }} />
                     </View>
                     <View style={styles.infoContainer}>
@@ -44,7 +47,7 @@ class UserProfile extends React.Component {
                         <InfoRow title="Ngày sinh" value="10/3/1997" />
                         <InfoRow title="Địa chỉ" value="Nguyễn Cư Trinh" />
                         <InfoRow title="Email" value="thinhkhang97@gmail.com" />
-                    </View>
+                    </View> */}
                     <MainButton title="Đăng xuất" onPress={this.onPress} style={styles.signOut}/>
                 </ScrollView>
             </View>
