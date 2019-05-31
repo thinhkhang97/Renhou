@@ -25,20 +25,6 @@
       "scale": "2x"
     },
     {
-<<<<<<< HEAD
-=======
-      "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
->>>>>>> develop
       "size" : "29x29",
       "idiom" : "iphone",
       "filename" : "logo2-29@2x.png",
