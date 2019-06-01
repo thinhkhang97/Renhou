@@ -32,6 +32,11 @@ $ cd ios
 $ pod install
 ```
 
+Link các package
+```sh
+$ react-native link
+```
+
 Khởi chạy server local host
 ```sh
 $ cd Renhou-BE
